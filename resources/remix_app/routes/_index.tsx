@@ -9,8 +9,8 @@ export default function Index() {
 
   return (
     <Container
-      title='Welcome to Dreamstart'
-      subtitle='by @matstack'
+      title={<span>Welcome to Dreamstart</span>}
+      subtitle={<div>by @matstack</div>}
     >
       <div>This is the start of something great!</div>
       <div>With dreamstart you can build anything.</div>
