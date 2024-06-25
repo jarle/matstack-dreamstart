@@ -14,7 +14,8 @@ export default defineConfig({
     () => import('@adonisjs/core/commands'),
     () => import('@adonisjs/lucid/commands'),
     () => import('@matstack/remix-adonisjs/commands'),
-    () => import('@adonisjs/mail/commands')
+    () => import('@adonisjs/mail/commands'),
+    () => import('@adonisjs/cache/commands')
   ],
 
   /*
@@ -44,7 +45,8 @@ export default defineConfig({
     () => import('@adonisjs/redis/redis_provider'),
     () => import('@adonisjs/lucid/database_provider'),
     () => import('@adonisjs/mail/mail_provider'),
-    () => import('@adonisjs/auth/auth_provider')
+    () => import('@adonisjs/auth/auth_provider'),
+    () => import('@adonisjs/cache/cache_provider')
   ],
 
   /*

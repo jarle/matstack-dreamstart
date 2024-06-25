@@ -8,6 +8,7 @@
 |
 */
 
+import app from '@adonisjs/core/services/app'
 import router from '@adonisjs/core/services/router'
 import server from '@adonisjs/core/services/server'
 
@@ -46,4 +47,16 @@ router.use([
 export const middleware = router.named({
   guest: () => import('#middleware/guest_middleware'),
   auth: () => import('#middleware/auth_middleware')
+})
+
+/**
+ * We start a worker in the same process on boot
+ */
+app.booted(async () => {
+  const isValidEnvironment = ['web', 'test'].includes(app.getEnvironment())
+  const isReleaseCommand = Boolean(process.env.RELEASE_COMMAND)
+  if (isValidEnvironment && !isReleaseCommand) {
+    const queue = await import('@rlanz/bull-queue/services/main')
+    queue.default.process({ queueName: 'default' })
+  }
 })
