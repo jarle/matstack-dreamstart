@@ -14,6 +14,7 @@ export default defineConfig({
     () => import('@adonisjs/core/commands'),
     () => import('@adonisjs/lucid/commands'),
     () => import('@matstack/remix-adonisjs/commands'),
+    () => import('@adonisjs/mail/commands')
   ],
 
   /*
@@ -40,6 +41,10 @@ export default defineConfig({
     () => import('@adonisjs/vite/vite_provider'),
     () => import('@matstack/remix-adonisjs/remix_provider'),
     () => import('#providers/service_provider'),
+    () => import('@adonisjs/redis/redis_provider'),
+    () => import('@adonisjs/lucid/database_provider'),
+    () => import('@adonisjs/mail/mail_provider'),
+    () => import('@adonisjs/auth/auth_provider')
   ],
 
   /*
