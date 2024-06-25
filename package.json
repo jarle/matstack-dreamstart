@@ -75,6 +75,7 @@
     "@rlanz/bull-queue": "^3.0.0",
     "@types/uuid": "^10.0.0",
     "@vinejs/vine": "^2.1.0",
+    "adonis-sail": "^1.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "edge.js": "^6.0.2",

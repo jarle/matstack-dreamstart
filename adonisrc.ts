@@ -15,7 +15,8 @@ export default defineConfig({
     () => import('@adonisjs/lucid/commands'),
     () => import('@matstack/remix-adonisjs/commands'),
     () => import('@adonisjs/mail/commands'),
-    () => import('@adonisjs/cache/commands')
+    () => import('@adonisjs/cache/commands'),
+    () => import('adonis-sail/commands')
   ],
 
   /*
@@ -94,7 +95,7 @@ export default defineConfig({
     },
   ],
   assetsBundler: false,
-  unstable_assembler: {
+  hooks: {
     onBuildStarting: [() => import('@matstack/remix-adonisjs/build_hook')],
   },
 })
