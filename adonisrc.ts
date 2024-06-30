@@ -49,7 +49,8 @@ export default defineConfig({
     () => import('@adonisjs/mail/mail_provider'),
     () => import('@adonisjs/auth/auth_provider'),
     () => import('@adonisjs/cache/cache_provider'),
-    () => import('@rlanz/bull-queue/queue_provider')
+    () => import('@rlanz/bull-queue/queue_provider'),
+    () => import('@adonisjs/limiter/limiter_provider')
   ],
 
   /*

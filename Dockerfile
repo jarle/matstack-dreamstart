@@ -1,17 +1,20 @@
 FROM node:22-alpine as base
 
 RUN apk --no-cache add curl
+RUN npm install -g pnpm
+ENV PNPM_HOME=/app/.pnpm
+ENV PATH=$PNPM_HOME:$PATH
 
 # All deps stage
 FROM base as deps
 WORKDIR /app
-ADD package.json package-lock.json ./
-RUN npm ci
+ADD package.json pnpm-lock.yaml ./
+RUN pnpm install
 
 # Production only deps stage
 FROM deps as production-deps
 WORKDIR /app
-RUN npm prune --production
+RUN pnpm prune --production
 RUN wget https://gobinaries.com/tj/node-prune --output-document - | /bin/sh && node-prune
 
 # Build stage
@@ -26,7 +29,7 @@ WORKDIR /app
 COPY --from=production-deps /app/node_modules /app/node_modules
 COPY --from=build /app/build /app
 COPY --from=build /app/ecosystem.config.cjs /app
-RUN npm i -g pm2
+RUN pnpm i -g pm2
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
