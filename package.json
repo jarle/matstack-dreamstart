@@ -70,6 +70,7 @@
     "@adonisjs/vite": "^3.0.0",
     "@dimerapp/markdown": "^8.0.1",
     "@matstack/remix-adonisjs": "^0.0.34",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@remix-run/css-bundle": "^2.10.0",
     "@remix-run/node": "^2.10.0",

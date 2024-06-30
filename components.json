@@ -12,6 +12,6 @@
   },
   "aliases": {
     "components": "resources/remix_app/@/components",
-    "utils": "resources/remix_app/@/lib/utils"
+    "utils": "~/@/lib/utils.js"
   }
 }
