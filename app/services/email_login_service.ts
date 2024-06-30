@@ -17,7 +17,7 @@ export default class EmailLogin {
   ) {
     this.limiter = adonisLimiter.use('redis', {
       requests: 5,
-      duration: '24 hours'
+      duration: '1 hours'
     })
   }
 
