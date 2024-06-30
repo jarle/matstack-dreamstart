@@ -2,17 +2,6 @@ import User from '#models/user';
 import db from '@adonisjs/lucid/services/db';
 
 export default class UserService {
-  async createUser(props: { email: string }) {
-    const user = await User.create({
-      email: props.email,
-    })
-    await user.related('workspaces').create({
-      name: 'Personal',
-    })
-
-    return user
-  }
-
   async getOrCreateUser(props: { id?: string; email: string; }) {
     const existingUser = await User.findBy('email', props.email)
     if (!existingUser) {
@@ -27,9 +16,6 @@ export default class UserService {
             client: trx,
           }
         )
-        await newUser.related('workspaces').create({
-          name: 'Personal',
-        })
         await trx.commit()
 
         return {
