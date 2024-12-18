@@ -1,15 +1,11 @@
-import { ActionFunctionArgs } from '@remix-run/node'
+import { ActionFunctionArgs } from 'react-router';
 
-import { redirect } from '@remix-run/node'
-import { useFetcher } from '@remix-run/react'
-import vine from '@vinejs/vine'
-import { Button } from '~/@/components/ui/button.js'
-import { intentValidation } from '~/utils/intent-validation.js'
+import { redirect, useFetcher } from 'react-router';
+import { Button } from '~/@/components/ui/button.js';
+import { intentValidation } from '~/utils/intent-validation.js';
 
 const actionValidator = intentValidation({
-  log_out: {
-    noop: vine.string().optional(),
-  },
+  log_out: {},
 })
 
 export const action = async ({ context }: ActionFunctionArgs) => {
@@ -18,7 +14,7 @@ export const action = async ({ context }: ActionFunctionArgs) => {
 
   if (intent === 'log_out') {
     await http.auth.use('web').logout()
-    return redirect('/login')
+    throw redirect('/login')
   }
   return null
 }

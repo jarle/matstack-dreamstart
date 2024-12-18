@@ -1,18 +1,18 @@
-import { Outlet, json, useLoaderData } from '@remix-run/react'
-import { Container } from '~/components/Container.js'
-import { Header } from '~/components/Header.js'
+import { Outlet, useLoaderData } from 'react-router';
+import { Container } from '~/components/Container.js';
+import { Header } from '~/components/Header.js';
 
-import type { LoaderFunctionArgs } from '@remix-run/node'
+import type { LoaderFunctionArgs } from 'react-router';
 
 export const loader = async ({ context }: LoaderFunctionArgs) => {
   const { http } = context
   const user = http.auth.user
 
-  return json({
+  return {
     user: user ? {
       email: user.email
     } : undefined
-  })
+  }
 }
 
 export default function Page() {

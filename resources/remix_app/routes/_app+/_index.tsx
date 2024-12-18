@@ -1,4 +1,4 @@
-import { type MetaFunction } from '@remix-run/node'
+import { type MetaFunction } from 'react-router';
 import { Container } from '~/components/Container.js'
 import { Link } from '~/components/Link.js'
 

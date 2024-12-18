@@ -1,6 +1,5 @@
-import { ActionFunctionArgs, json } from '@remix-run/node'
-import { Form, isRouteErrorResponse, useActionData, useRouteError } from '@remix-run/react'
-import { Button } from '~/@/components/ui/button.js'
+import { ActionFunctionArgs, Form, isRouteErrorResponse, useActionData, useRouteError } from 'react-router';
+import { Button } from '~/@/components/ui/button.js';
 import {
   Card,
   CardContent,
@@ -8,18 +7,18 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/@/components/ui/card.js"
-import { Input } from "~/@/components/ui/input.js"
+} from "~/@/components/ui/card.js";
+import { Input } from "~/@/components/ui/input.js";
 
-import { redirect } from '@remix-run/node'
-import vine from '@vinejs/vine'
-import { AlertCircle } from 'lucide-react'
-import { Alert, AlertDescription, AlertTitle } from '~/@/components/ui/alert.js'
-import { intentValidation } from '~/utils/intent-validation.js'
+import vine from '@vinejs/vine';
+import { AlertCircle } from 'lucide-react';
+import { redirect } from 'react-router';
+import { Alert, AlertDescription, AlertTitle } from '~/@/components/ui/alert.js';
+import { intentValidation } from '~/utils/intent-validation.js';
 
 const actionValidator = intentValidation({
   login: {
-    email: vine.string().email(),
+    email: vine.string().email().toLowerCase(),
   },
 })
 
@@ -31,19 +30,19 @@ export const action = async ({ context }: ActionFunctionArgs) => {
 
   if (intent === 'login') {
     if (!service.isValid(email)) {
-      return json({
+      return {
         error: 'Invalid email provider. Please use a different email.'
-      }, { status: 400 })
+      }
     }
     const canTry = await service.registerAttempt(http)
     if (!canTry) {
       http.logger.warn(`IP ${http.request.ip()} has exceeded login attempts, tried with ${email}`)
-      return json({
+      return {
         error: 'Too many attempts. Please try again later.'
-      }, { status: 400 })
+      }
     }
     service.sendLoginLink(email)
-    return redirect(`/check-email?email=${email}`)
+    throw redirect(`/check-email?email=${email}`)
   } else {
     http.logger.error(`Invalid intent ${intent} for login route`)
   }

@@ -1,4 +1,4 @@
-import { useSearchParams } from '@remix-run/react'
+import { useSearchParams } from 'react-router';
 import { MailPlus } from 'lucide-react'
 import { Button } from '~/@/components/ui/button.js'
 import { H1, P } from '~/components/Basics.js'
