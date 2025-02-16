@@ -11,6 +11,7 @@ export default class AuthMiddleware {
 
   openRoutes = [
     this.redirectTo,
+    '/__manifest',
     '/check-email',
     '/register',
     '/email-login',
