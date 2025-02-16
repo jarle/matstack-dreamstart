@@ -10,7 +10,7 @@ export const loader = async ({ context }: Route.LoaderArgs) => {
   return {
     user: user ? {
       email: user.email
-    } : undefined
+    } : undefined,
   }
 }
 
@@ -18,11 +18,11 @@ export default function Page() {
   const data = useLoaderData<typeof loader>()
 
   return (
-    <>
+    <div>
       <Header user={data.user} />
       <Container>
         <Outlet />
       </Container>
-    </>
+    </div>
   )
 }
