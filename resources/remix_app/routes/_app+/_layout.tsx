@@ -1,10 +1,9 @@
 import { Outlet, useLoaderData } from 'react-router';
 import { Container } from '~/components/Container.js';
 import { Header } from '~/components/Header.js';
+import { Route } from './+types/_layout.js';
 
-import type { LoaderFunctionArgs } from 'react-router';
-
-export const loader = async ({ context }: LoaderFunctionArgs) => {
+export const loader = async ({ context }: Route.LoaderArgs) => {
   const { http } = context
   const user = http.auth.user
 
