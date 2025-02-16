@@ -24,7 +24,8 @@ export default class AuthMiddleware {
       guards?: (keyof Authenticators)[]
     } = {}
   ) {
-    if (this.openRoutes.includes(ctx.request.parsedUrl.pathname ?? '')) {
+    if (this.openRoutes.some((r) => ctx.request.parsedUrl.pathname?.startsWith(r))) {
+      await ctx.auth.check()
       return next()
     }
     await ctx.auth.authenticateUsing(options.guards, { loginRoute: this.redirectTo })
