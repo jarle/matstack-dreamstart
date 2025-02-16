@@ -1,14 +1,14 @@
-import { ActionFunctionArgs } from 'react-router';
 
 import { redirect, useFetcher } from 'react-router';
 import { Button } from '~/@/components/ui/button.js';
 import { intentValidation } from '~/utils/intent-validation.js';
+import { Route } from './+types/logout.js';
 
 const actionValidator = intentValidation({
   log_out: {},
 })
 
-export const action = async ({ context }: ActionFunctionArgs) => {
+export const action = async ({ context }: Route.ActionArgs) => {
   const { http } = context
   const { intent } = await http.request.validateUsing(actionValidator)
 

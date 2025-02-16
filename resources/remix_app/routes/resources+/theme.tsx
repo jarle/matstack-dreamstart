@@ -1,8 +1,8 @@
-import type { ActionFunctionArgs, LoaderFunctionArgs } from 'react-router';
+import vine from '@vinejs/vine';
+import { useEffect } from 'react';
 import { Form, useFetcher } from 'react-router';
-import vine from '@vinejs/vine'
-import { useEffect } from 'react'
-import { intentValidation } from '../../utils/intent-validation.js'
+import { intentValidation } from '../../utils/intent-validation.js';
+import { Route } from './+types/theme.js';
 
 const actionValidator = intentValidation({
   'change-theme': {
@@ -13,7 +13,7 @@ const actionValidator = intentValidation({
   }
 })
 
-export const action = async ({ context }: ActionFunctionArgs) => {
+export const action = async ({ context }: Route.ActionArgs) => {
   const { http } = context
   const r = await http.request.validateUsing(actionValidator)
   if (r.intent === 'change-theme') {
@@ -29,7 +29,7 @@ export const action = async ({ context }: ActionFunctionArgs) => {
   return null
 }
 
-export const loader = async ({ context }: LoaderFunctionArgs) => {
+export const loader = async ({ context }: Route.LoaderArgs) => {
   const { http } = context
 
   return {

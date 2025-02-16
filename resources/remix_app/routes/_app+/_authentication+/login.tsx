@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, Form, isRouteErrorResponse, useActionData, useRouteError } from 'react-router';
+import { Form, isRouteErrorResponse, useActionData, useRouteError } from 'react-router';
 import { Button } from '~/@/components/ui/button.js';
 import {
   Card,
@@ -15,6 +15,7 @@ import { AlertCircle } from 'lucide-react';
 import { redirect } from 'react-router';
 import { Alert, AlertDescription, AlertTitle } from '~/@/components/ui/alert.js';
 import { intentValidation } from '~/utils/intent-validation.js';
+import { Route } from './+types/login.js';
 
 const actionValidator = intentValidation({
   login: {
@@ -22,7 +23,7 @@ const actionValidator = intentValidation({
   },
 })
 
-export const action = async ({ context }: ActionFunctionArgs) => {
+export const action = async ({ context }: Route.ActionArgs) => {
   const { http, make } = context
   const { intent, email } = await http.request.validateUsing(actionValidator)
 
