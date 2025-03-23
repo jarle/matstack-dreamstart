@@ -1,0 +1,8 @@
+---
+description: Frontend rules for functionality in the Remix app
+globs: resources/remix_app/**/*
+---
+- Use Suspend with Async when possible to make UI snappy
+- Avoid too many conditionals inside components, use composition instead.
+- Use the flat routes convention `kiliman/remix-flat-routes` when organizing the UI.
+- Add components with shadcn like this: `npx shadcn@latest add <component>`

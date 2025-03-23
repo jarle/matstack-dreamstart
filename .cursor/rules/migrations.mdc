@@ -1,0 +1,9 @@
+---
+description: Database migrations and when adding or modifying datatbase models
+globs: 
+---
+- We use AdonisJS Lucid to handle migrations and database models. Lucid is based on Knex.
+- All models are placed in `app/models`, and all database interaction goes through these models.
+- All database migrations are placed in `app/database/migrations`.
+- For creating new models, including a migration file (for example User): `node ace make:model -m User`
+- For creating new migrations only: `node ace make:migration create-users-table`

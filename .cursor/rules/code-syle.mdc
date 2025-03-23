@@ -1,0 +1,7 @@
+---
+description: Application code style
+globs: **/*
+---
+- The code base is in typescript and should be end-to-end type safe. Some local imports use `.js`, but the file extension in the file system is actually `.ts` (this is a typescript quirk.)
+- Types should be inferred as much as possible. Do not introduce additional types or interfaces just to fix lint errors - they need a functional reason to exist.
+- Methods accept an object `props` or similar so it's possible to use named parameters. The type for the prop object should be inlined in the method signature.

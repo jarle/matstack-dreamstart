@@ -1,0 +1,10 @@
+---
+description: Adding new services
+globs: 
+---
+- The frontend uses services in loaders/actions through the AdonisJS IoC container.
+- Service classes are located under `app/services` (path alias `#services`)
+- Services should be added with the command `node ace add:service ServiceName` which will instantiate a new class in the `#services` folder.
+- Simple services can be one file, more intricate services get their own folder when more files are required.
+- The `@inject()` decorator can be used to inject other services when needed.
+- After adding a new service, it should be registered as a singleton in the IoC container at `app/services/_index.ts`

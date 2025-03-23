@@ -1,0 +1,18 @@
+---
+description: When dealing with HTTP forms and user submitted actions/data
+globs: 
+---
+- Use the react-router `Form`
+- Form submissions are validated using [intent-validation.ts](mdc:resources/remix_app/utils/intent-validation.ts). The form should have hidden input with name `intent` which is the key for the intent validation, along with an object corresponding to the other input elements. The vine validator is then used like so:
+```ts
+const actionValidator = intentValidation({
+  login: {
+    email: vine.string().email().toLowerCase(),
+  }
+})
+
+const r = await http.request.validateUsing(actionValidator)
+if (r.intent === 'login') {
+  // here the type will be narrowed to the login shape and `email` will be available
+}
+```
