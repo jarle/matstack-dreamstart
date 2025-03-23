@@ -2,7 +2,7 @@
 description: General rules
 globs: resources/remix_app/**/*
 ---
-- Remix is now merged into React Router. Import remix code from `react-router` or `@react-router/node`
+- Remix is now merged into React Router. Import remix code from `react-router`. If it's not available there, it might be in `@react-router/node`
 - Actions and Loader type signatures are typed using `import { Route } from './+types/<file_name>.js'` and used like this:
 ```ts
 export async function loader({ request, context }: Route.LoaderArgs) {
@@ -15,3 +15,12 @@ export async function loader({ request, context }: Route.LoaderArgs) {
 - On the `context` object you find the AdonisJS http context and the AdonisJS IoC container. This is the primary way the Remix app communicates with the backend.
 - Services are added to the Adonis IoC container with string literals in [_index.ts](mdc:app/services/_index.ts), there you can see all available services. The Remix code should only interact through the IoC container, and not have direct code dependencies on the AdonisJS code. Most work should be done in the service layer, avoid doing too much in actions and loaders.
 - Environment variables can be accessed from the context: `const env = await make('env')`
+- **Always throw redirects** rather than returning them to ensure proper type inference in loaders and actions:
+```ts
+// Correct - throws the redirect
+throw redirect('/path')
+
+// Incorrect - returns the redirect
+return redirect('/path')
+```
+- All API-related functionality should be implemented in the AdonisJS application, not in Remix. Remix should only be used for web application frontend functionality and should communicate with AdonisJS services through the IoC container.

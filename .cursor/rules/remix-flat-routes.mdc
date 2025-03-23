@@ -1,0 +1,54 @@
+---
+description: Rules for organizing routes in Remix using the Flat Routes convention
+globs: resources/remix_app/routes/**/*
+---
+# Remix Route Structure
+
+This document outlines our route organization strategy using the [remix-flat-routes](https://github.com/kiliman/remix-flat-routes) library.
+
+## Basic Concepts
+
+We use the flat-routes convention from `@kiliman/remix-flat-routes` to organize our routes. This system allows for a more intuitive and manageable route hierarchy without deeply nested folders.
+
+## File Naming Conventions
+
+### Basic Route Structure
+
+- **Simple routes**: `pagename.tsx` → `/pagename`
+- **Nested routes with dots**: `parent.child.tsx` → `/parent/child`
+- **Index routes**: `parent.index.tsx` or `parent._index.tsx` → `/parent/`
+- **Layout routes**: Files that serve as parent routes for other routes, e.g., `parent.tsx`
+
+### Special Prefixes and Suffixes
+
+- **Pathless layouts** (no URL segment): `_layoutname.tsx` 
+- **Dynamic parameters**: `users.$userId.tsx` → `/users/:userId`
+- **Optional segments**: `parent.(optional).tsx` → `/parent/optional?`
+- **Splat/wildcard routes**: `docs.$.tsx` → `/docs/*`
+- **Resource routes**: `file[.extension].tsx` → `/file.extension`
+- **Escaping parent layouts**: `parent_.child.tsx` (underscore after segment) to escape nesting in the parent
+
+### Directory Organization (+)
+
+We use the hybrid routes approach with the `+` suffix for directories:
+
+- **Route directories**: `section+/` for directories that should be treated as flat files
+  - Example: `api+/endpoint.tsx` → `/api/endpoint`
+  - Files within these directories use the parent directory name as prefix
+- **Nested directories without `+`**: Used for true folder nesting with their own layouts
+
+## Practical Examples
+
+1. **API Routes**: `api+/endpoint.tsx` → `/api/endpoint`
+2. **Authenticated Routes**: `_auth+/route.tsx` (pathless layout with nested routes)
+3. **Dynamic Parameters**: `resources.$resourceId.tsx` → `/resources/:resourceId`
+4. **Resource Routes**: `thumbnails.$videoId[.jpg].tsx` → `/thumbnails/:videoId.jpg`
+5. **Multiple Layout Nesting**: `_auth+/admin+/settings.tsx` → `/admin/settings` (with auth layout)
+
+## Best Practices
+
+1. **Colocation**: Keep related files together in directories with the `+` suffix
+2. **Naming Consistency**: Use descriptive names that reflect the route's purpose
+3. **Pathless Layouts**: Use `_` prefix for layout routes that shouldn't create URL segments
+4. **Resource Files**: Use square brackets `[]` to denote routes that serve non-HTML resources
+5. **Avoid Deep Nesting**: Leverage the flat-routes convention to avoid deeply nested directories
