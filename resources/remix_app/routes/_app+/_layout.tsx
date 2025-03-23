@@ -1,6 +1,6 @@
 import { Outlet, useLoaderData } from 'react-router';
-import { Container } from '~/components/Container.js';
-import { Header } from '~/components/Header.js';
+import { Container } from '~/components/container.js';
+import { Header } from '~/components/header.js';
 import { Route } from './+types/_layout.js';
 
 export const loader = async ({ context }: Route.LoaderArgs) => {

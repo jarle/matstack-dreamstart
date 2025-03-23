@@ -1,21 +1,10 @@
-import { Form, isRouteErrorResponse, useActionData, useRouteError } from 'react-router';
-import { Button } from '~/@/components/ui/button.js';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/@/components/ui/card.js";
-import { Input } from "~/@/components/ui/input.js";
+import { isRouteErrorResponse, useRouteError } from 'react-router';
 
 import vine from '@vinejs/vine';
-import { AlertCircle } from 'lucide-react';
 import { redirect } from 'react-router';
-import { Alert, AlertDescription, AlertTitle } from '~/@/components/ui/alert.js';
 import { intentValidation } from '~/utils/intent-validation.js';
-import { Route } from './+types/login.js';
+import { Route } from './+types/_route.js';
+import { LoginForm } from './login-form.js';
 
 const actionValidator = intentValidation({
   login: {
@@ -51,40 +40,9 @@ export const action = async ({ context }: Route.ActionArgs) => {
 }
 
 export default function Page() {
-  const actionData = useActionData<typeof action>()
-
   return (
     <div className='flex flex-col items-center w-full'>
-    <Form method='POST'>
-        <div>
-        <Card className="w-full max-w-sm">
-          <CardHeader>
-            <CardTitle className="text-2xl">Login</CardTitle>
-            <CardDescription>
-              Enter your email below to sign in to your account.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-4">
-            <input type="hidden" name="intent" value="login" />
-            <div className="grid gap-2">
-              <Input name="email" type="email" placeholder="Email" required />
-            </div>
-            </CardContent>
-            <CardFooter className='flex flex-col items-center gap-5'>
-              <Button className="w-full" type='submit'>Sign in</Button>
-              {actionData?.error && (
-                <Alert variant="destructive">
-                  <AlertCircle className="size-4" />
-                  <AlertTitle>Error</AlertTitle>
-                  <AlertDescription>
-                    {actionData.error}
-                  </AlertDescription>
-                </Alert>
-              )}
-            </CardFooter>
-          </Card>
-        </div>
-      </Form>
+      <LoginForm />
     </div>
   )
 }

@@ -6,7 +6,7 @@ interface MainContainerProps {
 
 export function Container({ children, title, subtitle }: MainContainerProps) {
   return (
-    <div className="w-full max-w-2xl mx-auto pt-8">
+    <div className="w-full max-w-2xl pt-8 mx-auto">
       {title && <h1 className="text-4xl font-extrabold">{title}</h1>}
       {subtitle && <h2 className="mb-8 text-xl">{subtitle}</h2>}
       {children}

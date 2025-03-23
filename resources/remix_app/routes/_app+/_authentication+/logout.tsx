@@ -1,6 +1,6 @@
 
 import { redirect, useFetcher } from 'react-router';
-import { Button } from '~/@/components/ui/button.js';
+import { Button } from '~/components/ui/button.js';
 import { intentValidation } from '~/utils/intent-validation.js';
 import { Route } from './+types/logout.js';
 

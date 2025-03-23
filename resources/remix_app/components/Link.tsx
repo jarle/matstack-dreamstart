@@ -1,5 +1,5 @@
 import { LinkProps, Link as RLink } from 'react-router';
-import { twMerge } from 'tailwind-merge'
+import { twMerge } from 'tailwind-merge';
 
 export function Link(props: LinkProps) {
   const className = props.className || ''
