@@ -1,1 +1,41 @@
- 
+---
+description: Returning database model data from loaders
+globs: 
+---
+# Data Transfer Guidelines
+
+## DTOs and Data Mapping
+
+- **Use Inline Mapping** - Avoid separate mapper functions or DTO type definitions
+  - Map directly inline when transforming data to maximize type inference
+  - Keep transformations as close as possible to where they're needed
+  - No indirection between database entities and client-side data
+
+## Data Transformation in Loaders and Actions
+
+- When returning data to the client, always select only the fields that are needed by the UI components
+- Perform mapping directly inside the loader/action functions
+- Let TypeScript infer the types naturally without explicit type annotations
+- Example:
+
+```typescript
+// Correct approach - direct inline mapping
+return {
+  todos: todoEntities.map(todo => ({
+    id: todo.id,
+    title: todo.title,
+    completed: todo.completed
+    // Only include fields actually needed by the UI
+  }))
+}
+
+// Avoid this - no separate mappers or DTO types
+function mapToDTO(entity) { ... }  // Don't do this
+
+// Avoid this - no explicit DTO type definitions
+type TodoDTO = { ... }  // Don't do this
+```
+
+- This approach ensures maximum type inference all the way to the client components
+- The TypeScript compiler will infer the structure of the returned data
+- Client-side components will receive appropriate types without manual type definitions 

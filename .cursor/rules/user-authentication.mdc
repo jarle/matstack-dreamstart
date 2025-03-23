@@ -1,0 +1,42 @@
+---
+description: User authentication guidelines and flow
+globs: **/auth/**, **/login.*, **/register.*, **/users/**
+---
+
+# User Authentication Guidelines
+
+## Existing User Model
+
+The starter kit already includes a user model with the following characteristics:
+
+- The user model does not require passwords for authentication
+- Authentication is performed via passwordless methods:
+  - Magic email links
+  - Social login through AdonisJS Ally
+
+## Authentication Flow
+
+- DO NOT implement traditional password-based authentication
+- DO NOT store or handle user passwords
+- Use the existing User model from the starter kit
+- The User model has fields for profile information but does not rely on passwords for authentication
+
+## Database Structure
+
+The existing User model includes:
+- UUID as the primary identifier
+- Email for identification
+- Profile information (name, avatar, bio, website)
+- No password-dependent authentication
+
+## Implementation Guidelines
+
+- When implementing user registration or login, always use passwordless approaches
+- For email authentication, implement magic link functionality
+- For social login, use AdonisJS Ally with providers like Google, GitHub, etc.
+- Do not create additional user-related migrations without checking if the required fields already exist
+- Run `node ace migration:fresh` instead of just `migration:run` when testing database changes to ensure a clean state
+
+## Important Note
+
+The starter kit is designed with a specific authentication philosophy in mind - passwordless for better security and user experience. Any authentication implementation should respect this decision. 

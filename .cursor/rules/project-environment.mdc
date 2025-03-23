@@ -1,0 +1,44 @@
+---
+description: Project environment setup and development workflow
+globs: **/*
+---
+
+# Project Environment
+
+## Application Runtime
+
+- The application is **always running in the background** during development sessions
+- There is no need to start the application manually with `npm run dev` when working together
+- Changes to files may trigger automatic reloads of the application
+
+## Development Workflow
+
+- Focus on making code changes without worrying about starting/stopping the server
+- Database migrations and seeding should still be run explicitly when needed
+- The application can be accessed at [http://localhost:3333](http://localhost:3333) at any time
+
+## Testing Changes
+
+- Code changes can be immediately tested in the running application
+- For database schema changes, run migrations explicitly:
+  ```
+  node ace migration:fresh
+  ```
+- For data seeding, run seeders explicitly:
+  ```
+  node ace db:seed --files=path/to/seeder.ts
+  ```
+
+## Troubleshooting
+
+- If the application appears unresponsive, the issue is likely in your code changes
+- Check the console logs for any errors (they're being monitored in the background)
+- Focus on fixing code rather than restarting services
+
+## Important Note
+
+When developing code changes:
+1. Make changes to relevant files
+2. Run database migrations or seeders if needed
+3. Test changes directly in the running application
+4. No need to manually start/stop the application 
