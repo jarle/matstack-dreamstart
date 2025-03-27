@@ -1,6 +1,7 @@
 ---
 description: 
 globs: 
+alwaysApply: false
 ---
 - BullMQ is used for jobs through the library `@rlanz/bull-queue`
 - New jobs are added using the command `node ace make:job my_job` and are placed in `app/jobs`

@@ -1,38 +1,9 @@
 ---
 description: Frontend rules for functionality in the Remix app
 globs: resources/remix_app/**/*
+alwaysApply: false
 ---
-
-# Frontend Development Guidelines
-
-## Component Usage
-
-- Use Suspend with Async when possible to make UI snappy
+- Use React Suspend with Async when possible to make the UI snappy
 - Avoid too many conditionals inside components, use composition instead.
-- Use the flat routes convention `kiliman/remix-flat-routes` when organizing the UI.
-- Use `useFetcher()` from React Router instead of regular Form components when possible, especially for non-navigation operations. This allows tracking of loading/submitting states and avoids full page navigations.
-- Always provide a unique "key" prop when rendering lists of elements.
-
-## UI Component Installation
-
-### Adding shadcn Components
-
-- **ALWAYS** add UI components with the shadcn CLI like this: 
-  ```
-  npx shadcn@latest add <component>
-  ```
-- **NEVER** manually create UI component files that should come from shadcn
-- Available shadcn components can be found at [shadcn/ui](https://ui.shadcn.com/docs/components)
-- Common components include: button, card, dialog, dropdown-menu, form, input, label, separator, etc.
-
-## Testing Components Before Installation
-
-If you're unsure if a component exists in shadcn, you can run:
-
-```
-npx shadcn@latest add --help
-```
-
-## Route Organization
-
-Follow the hybrid flat routes convention documented in [remix-flat-routes.mdc](mdc:.cursor/rules/remix-flat-routes.mdc)
+- Use the flat routes convention `kiliman/remix-flat-routes` when organizing the UI, see [remix-flat-routes.mdc](mdc:.cursor/rules/remix-flat-routes.mdc)
+- Add components using instructions in [frontend-components.mdc](mdc:.cursor/rules/frontend-components.mdc)

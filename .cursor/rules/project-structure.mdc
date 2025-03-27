@@ -1,8 +1,9 @@
 ---
-description: Understanding the project structure
-globs: 
+description: 
+globs: resources/remix_app/**/*
+alwaysApply: false
 ---
 - The application is split in two: AdonisJS backend and Remix frontend. They are compiled into one app with vite and tsc.
-- The frontend interacts with the backend at runtime using the IoC container and HTTP request, not through APIs.
+- The frontend interacts with the backend at runtime using the IoC container services and HTTP request context, not through APIs. See [adding-services.mdc](mdc:.cursor/rules/adding-services.mdc) for services.
 - The general structure is based on AdonisJS 6 structure, with the Remix application placed in `resources/remix_app`
 - The two parts of the application should not have direct code dependency, but they can and should share types.

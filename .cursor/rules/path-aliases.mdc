@@ -1,8 +1,8 @@
 ---
 description: Project path aliases and import conventions
 globs: **/*
+alwaysApply: false
 ---
-
 # Project Path Aliases
 
 ## Important Path Aliases
@@ -20,4 +20,4 @@ Shadcn components are located in `#web/components/ui/` and are imported using:
 import { ComponentName } from "#web/components/ui/component-name.js"
 ```
 
-Remember to always include the `.js` extension in imports, even though the actual files have `.ts` or `.tsx` extensions (this is a TypeScript module resolution convention). 
+Remember to always include the `.js` extension in relative imports, even though the actual files have `.ts` or `.tsx` extensions (this is a TypeScript module resolution convention). 

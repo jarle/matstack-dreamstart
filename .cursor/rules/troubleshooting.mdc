@@ -1,0 +1,10 @@
+---
+description: Common problems that you might encounter and get stuck on
+globs: 
+alwaysApply: false
+---
+Problem: The react-router `Route.LoaderArgs` type gives linting errors
+Solution: See [remix-types.mdc](mdc:.cursor/rules/remix-types.mdc)
+
+Problem: Types are unknown or not correct
+Solution: Don't introduce unnecessary types, use type inference as described in [remix-types.mdc](mdc:.cursor/rules/remix-types.mdc)

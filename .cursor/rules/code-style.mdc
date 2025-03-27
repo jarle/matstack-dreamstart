@@ -1,13 +1,11 @@
 ---
 description: Application code style
-globs: resources/remix_app/**/*
+globs: 
+alwaysApply: false
 ---
-
-# Code Style Guidelines
-
 ## TypeScript Usage
 
-- The code base is in typescript and should be end-to-end type safe. Some local imports use `.js`, but the file extension in the file system is actually `.ts` (this is a typescript quirk.)
+- The code base is in typescript and should be end-to-end type safe.
 - **Trust TypeScript's inference** - avoid explicit type annotations when possible:
   - Do not introduce additional types or interfaces just to fix lint errors - they need a functional reason to exist
   - **Avoid type assertions** with `as` - they bypass TypeScript's type checking and can introduce errors
