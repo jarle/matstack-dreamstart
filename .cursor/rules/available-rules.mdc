@@ -1,0 +1,20 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+These rules are available to you:
+
+adding-services: Adding new services
+code-style: Application code style
+data-transfer: Returning data from actions and loaders
+form-data: When using HTTP forms and user submitted actions/data
+frontend-rules: Frontend rules for functionality in the Remix app
+migrations: Database migrations and when adding or modifying datatbase models
+path-aliases: Project path aliases and import conventions
+remix-flat-routes: Rules for organizing routes in Remix using the Flat Routes convention
+remix-service-interaction: How to interact with backend services from remix loader and actions
+remix-types: Remix route types usage and conventions
+troubleshooting: Common problems that you might encounter and get stuck on
+user-authentication: User authentication guidelines and flow
+user-interface: User interface guidelines and best practices 

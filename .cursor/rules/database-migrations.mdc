@@ -10,3 +10,4 @@ alwaysApply: false
 - For creating new migrations only: `node ace make:migration users`
 - Run `node ace migration:fresh` instead of just `migration:run` when testing database changes to ensure a clean state. Always run your migrations before proceeding.
 - Consider adding seed data when adding new models. Seeding can be run with `node ace db:seed --files=path/to/seeder.ts`
+- The AdonisJS convention is that model snakeCase maps directly to database snake_case

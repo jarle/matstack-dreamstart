@@ -1,11 +1,11 @@
 ---
 description: 
-globs: 
-alwaysApply: true
+globs: **/*
+alwaysApply: false
 ---
-- Always stop and read the relevant cursor rules before proceeding with a task, or if you become stuck.
+- Start each sentence with "Hell yeah!"
+- Do not perform any action before considering the cursor rules available for you. If you decide not to use any rules, state so clearly and why.
 - Changes that are not in line with relevant cursor rules will be rejected and is of no value.
-- Always mention what cursor rules you are using before proceeding.
 - The application is already running using `npm run dev`
 - Prefer type inferrence over introducing new interfaces/types
 - Referenced imports ending in `.js` are most likely `.ts[x]` files

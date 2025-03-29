@@ -1,5 +1,5 @@
 ---
-description: General rules
+description: 
 globs: resources/remix_app/**/*
 alwaysApply: false
 ---

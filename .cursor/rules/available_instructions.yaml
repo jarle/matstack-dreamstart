@@ -5,7 +5,7 @@ form-data: When dealing with HTTP forms and user submitted actions/data
 frontend-rules: Frontend rules for functionality in the Remix app
 general: General rules
 mdc-format: Use when user asks to create or update *.mdc files
-migrations: Database migrations and when adding or modifying datatbase models
+database-migrations: Database migrations and when adding or modifying datatbase models
 project-structure: Understanding the project structure
 remix-flat-routes: Rules for organizing routes in Remix using the Flat Routes convention
 remix-general: General rules 
