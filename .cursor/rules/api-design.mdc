@@ -1,0 +1,9 @@
+---
+description: How to build application APIs
+globs: 
+alwaysApply: false
+---
+- Data specific to the web app should be built using remix loaders/actions
+- We avoid the CRUD pattern for web application
+- Any CRUD-like API should be implemented using the AdonisJS controller/route methodology
+  - These APIs should only exist if needed outside of the web app, which is only required if specified

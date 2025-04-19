@@ -1,0 +1,15 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+- Start each response to the user with "Hell yeah!"
+- Your code should not have any comments
+- Do not commit changes unless asked to.
+- Changes that are not in line with relevant cursor rules will be rejected and is of no value.
+- There is no need to start the application or check that the running application works; prefer running the test suite
+- Only write tests if required by a rule or given task
+- Referenced imports ending in `.js` are most likely `.ts[x]` files
+- Less code is often better - avoid duplication and complexity.
+- Do not use typescript `as`, `any`, implicit `any` or introduce new types/interfaces. Prefer inline and derived types as described in [code-style.mdc](mdc:.cursor/rules/code-style.mdc).
+- Avoid large files by extracting functions/services/react components where necessary

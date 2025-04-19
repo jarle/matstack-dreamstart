@@ -1,0 +1,20 @@
+---
+description: When using HTTP forms and user submitted actions/data
+globs: 
+alwaysApply: false
+---
+- Use the react-router `useFetcher()` hook and its `fetcher.Form` component.
+- Implement the different states for the form pending/loading state
+- Form submissions are validated using [intent-validation.ts](mdc:resources/remix_app/utils/intent-validation.ts). The form should have a hidden input with name `intent` which is the key for the intent validation, along with an object corresponding to the other input elements. The vine validator is then used like so:
+```ts
+const actionValidator = intentValidation({
+  login: {
+    email: vine.string().email().toLowerCase(),
+  }
+})
+
+const r = await http.request.validateUsing(actionValidator)
+if (r.intent === 'login') {
+  // here the type will be narrowed to the login shape and `email` will be available
+}
+```
