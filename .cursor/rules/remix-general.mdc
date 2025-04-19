@@ -43,5 +43,5 @@ throw redirect('/path')
   - VineJS for validation
   - React
   - Tailwind
-  - DaisyUI
+  - Shadcn
   - Lucid icons

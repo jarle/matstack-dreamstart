@@ -9,5 +9,5 @@ alwaysApply: false
 - VineJS for validation
 - React
 - Tailwind
-- DaisyUI
+- Shadcn
 - Lucid icons
