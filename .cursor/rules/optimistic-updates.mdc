@@ -1,0 +1,113 @@
+---
+description: When data mutation on frontend should be snappy
+globs: 
+alwaysApply: false
+---
+# React Router Routes with Optimistic Updates
+
+## Route Structure
+Three main parts:
+1. `loader` - Fetches initial data
+2. `action` - Handles form submissions
+3. Component - Renders UI and manages optimistic updates
+
+## Data Loading and State Management
+
+```typescript
+// 1. Define loader to fetch initial data
+export const loader = async ({ context }: LoaderFunctionArgs) => {
+  const { http, make } = context;
+  // Get authenticated user
+  const authUser = http.auth.use('web').getUserOrFail();
+  await authUser.load('user')
+  const user = authUser.user;
+  
+  // Load required data
+  const service = await make('service_name');
+  const data = await service.getData();
+  
+  return { 
+    someFlag: data.flag,
+    otherData: data.value
+  };
+};
+
+// 2. Define action to handle form submissions
+export const action = async ({ context, request }: ActionFunctionArgs) => {
+  const { http, make } = context;
+  const authUser = http.auth.use('web').getUserOrFail();
+  await authUser.load('user')
+  const user = authUser.user;
+  
+  // Validate form data using intentValidation
+  const r = await http.request.validateUsing(actionValidator);
+  
+  if (r.intent === 'some_action') {
+    // Perform action logic
+    try {
+      const result = await performAction();
+      return { success: true, data: result };
+    } catch (error) {
+      return { success: false, error: 'Error message' };
+    }
+  }
+  
+  return { success: false };
+};
+
+// 3. Component with optimistic updates
+export default function MyFeature() {
+  // Get initial data from loader
+  const data = useLoaderData<typeof loader>();
+  // Get fetcher for form submission and optimistic updates
+  const fetcher = useFetcher();
+  
+  // Apply optimistic UI updates by checking:
+  // 1. First pending formData (optimistic)
+  // 2. Then action result data (actual result)
+  // 3. Finally fallback to initial loader data
+  let currentValue = data.someFlag;
+  
+  if (fetcher.formData?.get('intent') === 'some_action') {
+    // Optimistic update based on what we're submitting
+    currentValue = fetcher.formData.get('value') === 'true';
+  } else if (fetcher.data?.someResult !== undefined) {
+    // Server response update
+    currentValue = fetcher.data.someResult;
+  }
+  
+  // Handle form submission
+  const handleAction = () => {
+    fetcher.submit(
+      {
+        intent: 'some_action',
+        value: (!currentValue).toString()
+      },
+      { method: 'POST' }
+    );
+  };
+  
+  return (
+    <div>
+      <input
+        type="checkbox"
+        checked={currentValue}
+        onChange={handleAction}
+      />
+    </div>
+  );
+}
+```
+
+## Key Techniques
+
+1. **Direct data loading**: Use `useLoaderData` instead of `useState` for initial data
+2. **Optimistic updates**: Check data sources in priority order:
+   - `fetcher.formData`: What the user just submitted (optimistic)
+   - `fetcher.data`: Server response data (confirmed result)
+   - `data`: Initial loader data (fallback)
+3. **Form submission**: Use `fetcher.submit()` to submit forms without navigation
+4. **No useState**: Derive all UI state from the above data sources
+5. **Validation**: Use `intentValidation` for form data validation
+
+This pattern keeps your UI responsive while ensuring data consistency with the server.

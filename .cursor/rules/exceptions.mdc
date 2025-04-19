@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+- `node ace make:exception foo` -> Creates new exception `foo_exception.ts`

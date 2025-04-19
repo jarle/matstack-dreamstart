@@ -1,0 +1,88 @@
+---
+description: When creating full stack react components
+globs: 
+alwaysApply: false
+---
+# Full Stack Components
+
+Full stack components colocate UI components with their backend data requirements in a single file.
+
+## Core Pattern
+
+- Create resource routes in `resources+/` directories
+- Export both a loader/action and a React component from the same file
+- Import and use the component across the application where needed
+
+## Implementation Steps
+
+1. Create a resource route file in `resources+/`
+2. Export a loader or action function that handles data needs
+3. Export a React component from the same file
+4. Import and use the component in page routes
+
+## Usage Example
+
+```tsx
+// 1. Create file: resources+/myComponent.tsx
+import { LoaderFunctionArgs } from "react-router"
+import vine from "@vinejs/vine"
+
+// 2. Add validation if needed
+const loaderValidator = vine.compile(vine.object({
+  entityId: vine.string()
+}))
+
+// 3. Define server-side loader
+export const loader = async ({ context }: LoaderFunctionArgs) => {
+  const { http, make } = context
+  const { entityId } = await http.request.validateUsing(loaderValidator)
+  const service = await make('someService')
+  return service.getData(entityId)
+}
+
+// 4. Export component that consumes the data
+export const MyComponent = (props: {
+  data: Awaited<ReturnType<typeof loader>>
+  isLoading?: boolean
+}) => {
+  // Component implementation with loading states, etc.
+  return (/* UI implementation */)
+}
+
+// 5. Use in a page route:
+// routes/somePage.tsx
+import { MyComponent } from "#web/routes/resources+/myComponent"
+```
+
+## Component Design Considerations
+
+- Accept an `isLoading` prop to handle pending states
+- Type the component's data prop based on the loader's return type
+- Include fallbacks for loading, error and empty states
+- Keep the component focused on a single responsibility
+
+This pattern simplifies building interactive components by keeping all related code in one place, reducing the need to jump between multiple files.
+
+## Key Principles
+
+- Create resource routes in `resources+/` directories that export both loaders/actions and React components
+- Resource routes should have a clear, focused purpose - handling specific data or functionality
+- Use IoC container services for business logic, keep loaders/actions thin
+- Validate inputs using VineJS schema validation
+
+## Implementation Guidelines
+
+- Export loader/action functions that handle server-side data needs
+- Export React components that can be imported and used elsewhere
+- Use proper typing between loaders and components
+- Handle loading, error and empty states within the component
+- Include support for optimistic UI where appropriate
+
+## Best Practices
+
+- Include loading state handling with skeletons to prevent content shift
+- Properly type props using loader return types
+- Keep components focused on presentation, delegating business logic to services
+- Use proper pagination patterns for lists of data
+- Include appropriate error handling
+- Avoid direct database access in loaders/actions - use services instead

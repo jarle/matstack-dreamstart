@@ -17,9 +17,3 @@ alwaysApply: false
 
 - Methods accept an object `props` or similar so it's possible to use named parameters. The type for the prop object should be inlined in the method signature.
 - Use destructuring to access properties directly in function parameters
-
-## Code Organization
-
-- Use Locality of Behavior - for example keep route-specific components inside a given route folder instead of common components folder.
-- Prefer small, focused components and functions
-- Use composition instead of inheritance

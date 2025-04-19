@@ -1,7 +1,0 @@
----
-description: User interface guidelines and best practices
-globs: 
-alwaysApply: false
----
-- The user interface should be clean and not too overwhelming
-- It is important to use visual hierarchy to guide the user to the main intended action in a given view

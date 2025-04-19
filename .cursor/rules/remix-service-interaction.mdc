@@ -4,4 +4,5 @@ globs:
 alwaysApply: false
 ---
 - On the `context` object you find the AdonisJS http context and the AdonisJS IoC container. This is the primary way the Remix app communicates with the backend.
-- Services are added to the Adonis IoC container with string literals in @_index.ts, there you can see all available services. The Remix code should only interact through the IoC container, and not have direct code dependencies on the AdonisJS code. Most work should be done in the service layer, avoid doing too much in actions and loaders.
+- Services are added to the Adonis IoC container with string literals in [_index.ts](mdc:app/services/_index.ts), there you can see all available services. Note that the service class should be default exported to be properly instantiated here.
+- The Remix code should only interact through the IoC container, and not have direct code dependencies on the AdonisJS code. Most work should be done in the service layer, avoid doing too much in actions and loaders.

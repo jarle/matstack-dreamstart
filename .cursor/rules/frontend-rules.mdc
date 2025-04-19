@@ -3,7 +3,16 @@ description: Frontend rules for functionality in the Remix app
 globs: resources/remix_app/**/*
 alwaysApply: false
 ---
+- The target audience is a general population - use simple user-friendly language and avoid technical terms
+- Use spacing to create a UI that breathes and is visually pleasant
 - Use React Suspend with Async when possible to make the UI snappy
-- Avoid too many conditionals inside components, use composition instead.
+- Use optimistic updates when mutating data as described in [optimistic-updates.mdc](mdc:.cursor/rules/optimistic-updates.mdc)
+- Avoid ternaries and the `boolean && <Component />` pattern inside components, use composition instead.
+- Break down react components into several smaller components
+  - Prefer the `useLoaderData` hook in components over passing props
 - Use the flat routes convention `kiliman/remix-flat-routes` when organizing the UI, see [remix-flat-routes.mdc](mdc:.cursor/rules/remix-flat-routes.mdc)
-- Add components using instructions in [frontend-components.mdc](mdc:.cursor/rules/frontend-components.mdc)
+- Avoid using emojis, use the included icon library instead.
+- Avoid content shift when possible
+  - Try to use skeletons and sensible placeholders when data is loading
+  - Also make sure pagination is smooth without navigational controls moving around
+- Avoid using margin for your components; prefer flex gap and padding
