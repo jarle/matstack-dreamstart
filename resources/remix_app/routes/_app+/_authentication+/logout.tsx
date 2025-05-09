@@ -1,4 +1,5 @@
 
+import { adonisContext } from '@matstack/remix-adonisjs';
 import { redirect, useFetcher } from 'react-router';
 import { Button } from '~/@/components/ui/button.js';
 import { intentValidation } from '~/utils/intent-validation.js';
@@ -9,7 +10,7 @@ const actionValidator = intentValidation({
 })
 
 export const action = async ({ context }: Route.ActionArgs) => {
-  const { http } = context
+  const { http } = context.get(adonisContext)
   const { intent } = await http.request.validateUsing(actionValidator)
 
   if (intent === 'log_out') {

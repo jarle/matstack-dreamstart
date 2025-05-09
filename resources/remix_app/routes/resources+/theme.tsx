@@ -1,3 +1,4 @@
+import { adonisContext } from '@matstack/remix-adonisjs';
 import vine from '@vinejs/vine';
 import { useEffect } from 'react';
 import { Form, useFetcher, useLoaderData } from 'react-router';
@@ -16,7 +17,7 @@ const actionValidator = intentValidation({
 })
 
 export const action = async ({ context }: Route.ActionArgs) => {
-  const { http } = context
+  const { http } = context.get(adonisContext)
   const r = await http.request.validateUsing(actionValidator)
   if (r.intent === 'change-theme') {
     if (r.theme === 'system') {
@@ -25,14 +26,14 @@ export const action = async ({ context }: Route.ActionArgs) => {
       http.response.cookie(themeCookie, r.theme)
     }
   } else if (r.intent === 'set-prefer-dark-mode') {
-    context.http.response.cookie('prefers-dark-mode', r.prefersDarkMode)
+    http.response.cookie('prefers-dark-mode', r.prefersDarkMode)
   }
 
   return null
 }
 
 export const loader = async ({ context }: Route.LoaderArgs) => {
-  const { http } = context
+  const { http } = context.get(adonisContext)
 
   return {
     theme: http.request.cookie(themeCookie, 'system')
