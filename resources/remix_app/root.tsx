@@ -1,11 +1,12 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from 'react-router';
 
+import { adonisContext } from '@matstack/remix-adonisjs';
 import { Route } from './+types/root.js';
 import { themeCookie } from './routes/resources+/theme.js';
 import './tailwind.css';
 
 export const loader = async ({ context }: Route.LoaderArgs) => {
-  const { http } = context
+  const { http } = context.get(adonisContext)
   let theme = http.request.cookie(themeCookie, 'system')
   if (!theme) {
     const prefersDarkMode = http.request.cookie('prefers-dark-mode', 'system')

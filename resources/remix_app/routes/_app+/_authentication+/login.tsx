@@ -10,6 +10,7 @@ import {
 } from "~/@/components/ui/card.js";
 import { Input } from "~/@/components/ui/input.js";
 
+import { adonisContext } from '@matstack/remix-adonisjs';
 import vine from '@vinejs/vine';
 import { AlertCircle } from 'lucide-react';
 import { redirect } from 'react-router';
@@ -24,7 +25,7 @@ const actionValidator = intentValidation({
 })
 
 export const action = async ({ context }: Route.ActionArgs) => {
-  const { http, make } = context
+  const { http, make } = context.get(adonisContext)
   const { intent, email } = await http.request.validateUsing(actionValidator)
 
   const service = await make('email_login')
