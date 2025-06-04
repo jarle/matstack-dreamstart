@@ -1,7 +1,7 @@
 
+import { Button } from '#web/@/components/ui/button';
+import { intentValidation } from '#web/utils/intent-validation';
 import { redirect, useFetcher } from 'react-router';
-import { Button } from '~/@/components/ui/button.js';
-import { intentValidation } from '~/utils/intent-validation.js';
 import { Route } from './+types/logout.js';
 
 const actionValidator = intentValidation({

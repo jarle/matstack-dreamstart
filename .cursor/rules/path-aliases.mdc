@@ -9,15 +9,14 @@ alwaysApply: false
 
 - `#web/*` - Points to `./resources/remix_app/*` (defined in tsconfig.json)
 - `#web/components` - Used for shadcn components and utilities
-  - Component imports should use the `.js` extension even though the files are TypeScript
-  - Example: `import { cn } from "#web/lib/utils.js"`
+  - Example: `import { cn } from "#web/lib/utils"`
 
 ## Shadcn Component Imports
 
 Shadcn components are located in `#web/components/ui/` and are imported using:
 
 ```ts
-import { ComponentName } from "#web/components/ui/component-name.js"
+import { ComponentName } from "#web/components/ui/component-name"
 ```
 
 Remember to always include the `.js` extension in relative imports, even though the actual files have `.ts` or `.tsx` extensions (this is a TypeScript module resolution convention). 

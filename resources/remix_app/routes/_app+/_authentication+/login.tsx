@@ -1,5 +1,4 @@
-import { Form, isRouteErrorResponse, useActionData, useRouteError } from 'react-router';
-import { Button } from '~/@/components/ui/button.js';
+import { Button } from '#web/@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -7,15 +6,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "~/@/components/ui/card.js";
-import { Input } from "~/@/components/ui/input.js";
+} from "#web/@/components/ui/card";
+import { Input } from "#web/@/components/ui/input";
+import { Form, isRouteErrorResponse, useActionData, useRouteError } from 'react-router';
 
+import { Alert, AlertDescription, AlertTitle } from '#web/@/components/ui/alert';
+import { intentValidation } from '#web/utils/intent-validation';
 import vine from '@vinejs/vine';
 import { AlertCircle } from 'lucide-react';
 import { redirect } from 'react-router';
-import { Alert, AlertDescription, AlertTitle } from '~/@/components/ui/alert.js';
-import { intentValidation } from '~/utils/intent-validation.js';
-import { Route } from './+types/login.js';
+import { Route } from './+types/login';
 
 const actionValidator = intentValidation({
   login: {

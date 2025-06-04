@@ -1,8 +1,8 @@
+import { Button } from '#web/@/components/ui/button';
+import { H1, P } from '#web/components/basics';
+import { Link } from '#web/components/Link';
+import { MailPlus } from 'lucide-react';
 import { useSearchParams } from 'react-router';
-import { MailPlus } from 'lucide-react'
-import { Button } from '~/@/components/ui/button.js'
-import { H1, P } from '~/components/Basics.js'
-import { Link } from '~/components/Link.js'
 
 export default function Page() {
   const [searchParams] = useSearchParams()

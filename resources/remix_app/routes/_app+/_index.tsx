@@ -1,6 +1,6 @@
+import { Container } from '#web/components/Container';
+import { Link } from '#web/components/Link';
 import { type MetaFunction } from 'react-router';
-import { Container } from '~/components/Container.js'
-import { Link } from '~/components/Link.js'
 
 export const meta: MetaFunction = () => {
   return [{ title: 'New Dreamstart App' }, { name: 'description', content: 'Welcome to Dreamstart!' }]
