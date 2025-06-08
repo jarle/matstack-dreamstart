@@ -1,5 +1,5 @@
 
-import { Button } from '#web/@/components/ui/button';
+import { Button } from '#web/components/ui/button';
 import { intentValidation } from '#web/utils/intent-validation';
 import { redirect, useFetcher } from 'react-router';
 import { Route } from './+types/logout.js';

@@ -1,4 +1,4 @@
-import { Button } from '#web/@/components/ui/button';
+import { Button } from '#web/components/ui/button';
 import {
   Card,
   CardContent,
@@ -6,11 +6,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "#web/@/components/ui/card";
-import { Input } from "#web/@/components/ui/input";
+} from "#web/components/ui/card";
+import { Input } from "#web/components/ui/input";
 import { Form, isRouteErrorResponse, useActionData, useRouteError } from 'react-router';
 
-import { Alert, AlertDescription, AlertTitle } from '#web/@/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '#web/components/ui/alert';
 import { intentValidation } from '#web/utils/intent-validation';
 import vine from '@vinejs/vine';
 import { AlertCircle } from 'lucide-react';
