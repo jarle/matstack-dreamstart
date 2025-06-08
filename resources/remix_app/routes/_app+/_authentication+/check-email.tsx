@@ -1,6 +1,6 @@
-import { Button } from '#web/@/components/ui/button';
 import { H1, P } from '#web/components/basics';
 import { Link } from '#web/components/Link';
+import { Button } from '#web/components/ui/button';
 import { MailPlus } from 'lucide-react';
 import { useSearchParams } from 'react-router';
 

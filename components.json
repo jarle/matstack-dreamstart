@@ -1,17 +1,21 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "default",
+  "style": "new-york",
   "rsc": false,
   "tsx": true,
   "tailwind": {
-    "config": "tailwind.config.js",
+    "config": "",
     "css": "resources/remix_app/tailwind.css",
-    "baseColor": "slate",
+    "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
   },
   "aliases": {
-    "components": "resources/remix_app/@/components",
-    "utils": "#web/lib/utils.js"
-  }
+    "components": "#web/components",
+    "utils": "#web/lib/utils",
+    "ui": "#web/components/ui",
+    "lib": "#web/lib",
+    "hooks": "#web/hooks"
+  },
+  "iconLibrary": "lucide"
 }

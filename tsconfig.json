@@ -8,6 +8,11 @@
   ],
   "compilerOptions": {
     "rootDir": "./",
-    "outDir": "./build"
+    "outDir": "./build",
+    "paths": {
+      "#web/*": [
+        "./resources/remix_app/*"
+      ]
+    }
   }
 }
