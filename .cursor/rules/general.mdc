@@ -3,6 +3,7 @@ description:
 globs: 
 alwaysApply: true
 ---
+- The GitHub repository is matstack-dreamstart
 - Start each response to the user with "Hell yeah!"
 - Your code should not have any comments
 - Do not commit changes unless asked to.
