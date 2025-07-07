@@ -1,4 +1,4 @@
-import { H1, P } from '#web/components/basics';
+import { H1, P } from '#web/components/Basics';
 import { Link } from '#web/components/Link';
 import { Button } from '#web/components/ui/button';
 import { MailPlus } from 'lucide-react';
