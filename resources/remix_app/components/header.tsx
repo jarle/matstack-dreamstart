@@ -1,4 +1,4 @@
-import { Link } from './Link2.js'
+import { Link } from './link.js'
 
 export function Header(props: { user?: { email: string } }) {
   return (
