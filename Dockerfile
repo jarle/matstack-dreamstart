@@ -1,4 +1,4 @@
-FROM node:20-alpine as base
+FROM node:24-alpine as base
 
 RUN apk --no-cache add curl
 RUN npm install -g pnpm
