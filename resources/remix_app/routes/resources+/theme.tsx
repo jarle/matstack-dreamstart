@@ -1,7 +1,7 @@
 import vine from '@vinejs/vine';
 import { useEffect } from 'react';
 import { Form, useFetcher, useLoaderData } from 'react-router';
-import { intentValidation } from '../../utils/intent-validation.js';
+import { intentValidation } from '../../utils/intent_validation.js';
 import { Route } from './+types/theme.js';
 
 export const themeCookie = 'app-theme'

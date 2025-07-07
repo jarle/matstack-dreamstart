@@ -11,7 +11,7 @@ import { Input } from "#web/components/ui/input";
 import { Form, isRouteErrorResponse, useActionData, useRouteError } from 'react-router';
 
 import { Alert, AlertDescription, AlertTitle } from '#web/components/ui/alert';
-import { intentValidation } from '#web/utils/intent-validation';
+import { intentValidation } from '#web/utils/intent_validation';
 import vine from '@vinejs/vine';
 import { AlertCircle } from 'lucide-react';
 import { redirect } from 'react-router';
