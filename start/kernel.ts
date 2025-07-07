@@ -49,14 +49,3 @@ export const middleware = router.named({
   auth: () => import('#middleware/auth_middleware')
 })
 
-/**
- * We start a worker in the same process on boot
- */
-app.booted(async () => {
-  const isValidEnvironment = ['web', 'test'].includes(app.getEnvironment())
-  const isReleaseCommand = Boolean(process.env.RELEASE_COMMAND)
-  if (isValidEnvironment && !isReleaseCommand) {
-    const queue = await import('@rlanz/bull-queue/services/main')
-    queue.default.process({ queueName: 'default' })
-  }
-})

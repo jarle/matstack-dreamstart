@@ -50,7 +50,8 @@ export default defineConfig({
     () => import('@adonisjs/auth/auth_provider'),
     () => import('@adonisjs/cache/cache_provider'),
     () => import('@rlanz/bull-queue/queue_provider'),
-    () => import('@adonisjs/limiter/limiter_provider')
+    () => import('@adonisjs/limiter/limiter_provider'),
+    () => import('#providers/queue_provider')
   ],
 
   /*
