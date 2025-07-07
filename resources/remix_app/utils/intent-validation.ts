@@ -33,7 +33,7 @@ export function intentValidation<T extends ValidationObject>(
   return vine.compile(
     vine
       .object({
-        intent: vine.enum(Object.keys(validations)),
+        intent: vine.enum(Object.keys(validations) as (keyof T)[]),
       })
       .merge(validationGroup)
   )
