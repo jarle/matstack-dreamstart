@@ -1,5 +1,5 @@
-import { Container } from '#web/components/Container';
-import { Header } from '#web/components/Header';
+import { Container } from '#web/components/Container2';
+import { Header } from '#web/components/Header2';
 import { Outlet, useLoaderData } from 'react-router';
 import { Route } from './+types/_layout.js';
 
