@@ -24,6 +24,13 @@ export default class AuthMiddleware {
       guards?: (keyof Authenticators)[]
     } = {}
   ) {
+    const bearerToken = ctx.request.qs()['bearerToken']
+
+    if (bearerToken) {
+      // This allows us to specify the bearer token in query parameters (iframes etc)
+      ctx.request.headers()['authorization'] = `Bearer ${bearerToken}`
+    }
+
     if (this.openRoutes.some((r) => ctx.request.parsedUrl.pathname?.startsWith(r))) {
       await ctx.auth.check()
       return next()
