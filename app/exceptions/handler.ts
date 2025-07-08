@@ -1,7 +1,13 @@
+import { ErrorLogService } from '#services/error_log_service'
+import { inject } from '@adonisjs/core'
 import { ExceptionHandler, HttpContext } from '@adonisjs/core/http'
 import app from '@adonisjs/core/services/app'
 
+@inject()
 export default class HttpExceptionHandler extends ExceptionHandler {
+  constructor(private errorLogService: ErrorLogService) {
+    super()
+  }
   /**
    * In debug mode, the exception handler will display verbose errors
    * with pretty printed stack traces.
@@ -30,6 +36,11 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    * @note You should not attempt to send a response from this method.
    */
   async report(error: unknown, ctx: HttpContext) {
+    // Log error to database
+    if (error instanceof Error) {
+      await this.errorLogService.logError(error, ctx)
+    }
+
     return super.report(error, ctx)
   }
 }

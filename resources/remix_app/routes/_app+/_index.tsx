@@ -1,5 +1,5 @@
-import { Container } from '#web/components/Container';
-import { Link } from '#web/components/Link';
+import { Container } from '#web/components/container';
+import { Link } from '#web/components/link';
 import { type MetaFunction } from 'react-router';
 
 export const meta: MetaFunction = () => {
