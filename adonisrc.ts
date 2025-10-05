@@ -13,7 +13,7 @@ export default defineConfig({
   commands: [
     () => import('@adonisjs/core/commands'),
     () => import('@adonisjs/lucid/commands'),
-    () => import('@matstack/remix-adonisjs/commands'),
+    () => import('@matstack/react-adonisjs/commands'),
     () => import('@adonisjs/mail/commands'),
     () => import('@adonisjs/cache/commands'),
     () => import('adonis-sail/commands'),
@@ -42,7 +42,7 @@ export default defineConfig({
     () => import('@adonisjs/shield/shield_provider'),
     () => import('@adonisjs/static/static_provider'),
     () => import('@adonisjs/vite/vite_provider'),
-    () => import('@matstack/remix-adonisjs/remix_provider'),
+    () => import('@matstack/react-adonisjs/react_router_provider'),
     () => import('#providers/service_provider'),
     () => import('@adonisjs/redis/redis_provider'),
     () => import('@adonisjs/lucid/database_provider'),
@@ -100,6 +100,6 @@ export default defineConfig({
   ],
   assetsBundler: false,
   hooks: {
-    onBuildStarting: [() => import('@matstack/remix-adonisjs/build_hook')],
+    onBuildStarting: [() => import('@matstack/react-adonisjs/build_hook')],
   },
 })

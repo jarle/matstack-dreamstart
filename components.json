@@ -5,7 +5,7 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "resources/remix_app/tailwind.css",
+    "css": "resources/react_app/tailwind.css",
     "baseColor": "slate",
     "cssVariables": true,
     "prefix": ""

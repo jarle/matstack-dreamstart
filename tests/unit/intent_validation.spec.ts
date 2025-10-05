@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
 import vine from '@vinejs/vine'
-import { intentValidation } from '../../resources/remix_app/utils/intent_validation.js'
+import { intentValidation } from '../../resources/react_app/utils/intent_validation.js'
 
 test.group('Intent validation', () => {
   test('validates basic intent with string field', async ({ assert }) => {

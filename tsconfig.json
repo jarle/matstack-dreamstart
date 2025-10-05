@@ -4,14 +4,14 @@
     "**/*"
   ],
   "exclude": [
-    "resources/remix_app/**"
+    "resources/react_app/**"
   ],
   "compilerOptions": {
     "rootDir": "./",
     "outDir": "./build",
     "paths": {
       "#web/*": [
-        "./resources/remix_app/*"
+        "./resources/react_app/*"
       ]
     }
   }

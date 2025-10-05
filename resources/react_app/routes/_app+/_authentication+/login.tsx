@@ -15,7 +15,7 @@ import { intentValidation } from '#web/utils/intent_validation';
 import vine from '@vinejs/vine';
 import { AlertCircle } from 'lucide-react';
 import { redirect } from 'react-router';
-import { Route } from './+types/login';
+import { Route } from './+types/login.js';
 
 const actionValidator = intentValidation({
   login: {
@@ -55,20 +55,20 @@ export default function Page() {
 
   return (
     <div className='flex flex-col items-center w-full'>
-    <Form method='POST'>
+      <Form method='POST'>
         <div>
-        <Card className="w-full max-w-sm">
-          <CardHeader>
-            <CardTitle className="text-2xl">Login</CardTitle>
-            <CardDescription>
-              Enter your email below to sign in to your account.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-4">
-            <input type="hidden" name="intent" value="login" />
-            <div className="grid gap-2">
-              <Input name="email" type="email" placeholder="Email" required />
-            </div>
+          <Card className="w-full max-w-sm">
+            <CardHeader>
+              <CardTitle className="text-2xl">Login</CardTitle>
+              <CardDescription>
+                Enter your email below to sign in to your account.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-4">
+              <input type="hidden" name="intent" value="login" />
+              <div className="grid gap-2">
+                <Input name="email" type="email" placeholder="Email" required />
+              </div>
             </CardContent>
             <CardFooter className='flex flex-col items-center gap-5'>
               <Button className="w-full" type='submit'>Sign in</Button>
@@ -89,7 +89,6 @@ export default function Page() {
   )
 }
 
-// https://remix.run/docs/en/main/route/error-boundary
 export function ErrorBoundary() {
   const error = useRouteError();
 

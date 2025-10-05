@@ -3,9 +3,9 @@
 > [!NOTE]
 > Dreamstart and its documentation is a work in progress. Please come with suggestions on how to improve it by posting to [Discussions](https://github.com/jarle/matstack-dreamstart/discussions) or contacting me (Jarle) directly.
 
-Thank you for trying out Dreamstart!.
+Thank you for trying out Dreamstart!
 
-Dreamstart is an **opinionated starter kit** for building web apps with [remix-adonisjs](https://matstack.dev/remix-adonisjs/).
+Dreamstart is an **opinionated starter kit** for building web apps with [react-adonisjs](https://matstack.dev/react-adonisjs/).
 
 Dreamstart was created for quickly developing and launching great products.
 The goal is not simply to glue together different technologies and call it a day, but rather to create a blueprint for building robust products.

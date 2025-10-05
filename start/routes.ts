@@ -8,17 +8,11 @@
 */
 
 import router from '@adonisjs/core/services/router'
-import { middleware } from './kernel.js'
 
 const EmailLoginController = () => import('#controllers/email_login_controller')
 
 router.get('/email-login', [EmailLoginController, 'index'])
 
-router.any('*', async ({ remixHandler }) => {
-  return remixHandler()
+router.any('*', async ({ reactRouterHandler }) => {
+  return reactRouterHandler()
 })
-  .use(
-    middleware.auth({
-      guards: ['web'],
-    })
-  )

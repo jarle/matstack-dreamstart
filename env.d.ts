@@ -1,13 +1,13 @@
-import type { AdonisApplicationContext } from '@matstack/remix-adonisjs/types';
+import type { AdonisApplicationContext } from '@matstack/react-adonisjs/types';
 
 declare module 'react-router' {
-  interface AppLoadContext extends AdonisApplicationContext { }
+  interface RouterContextProvider extends AdonisApplicationContext { }
 
   interface LoaderFunctionArgs {
-    context: unknown;
+    context: AdonisApplicationContext;
   }
 
   interface ActionFunctionArgs {
-    context: unknown;
+    context: AdonisApplicationContext;
   }
 }
