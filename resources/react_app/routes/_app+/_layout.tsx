@@ -1,6 +1,6 @@
 import { Container } from '#web/components/Container';
 import { Header } from '#web/components/Header';
-import { Outlet, useLoaderData } from 'react-router';
+import { Outlet } from 'react-router';
 import { Route } from './+types/_layout.js';
 
 export const loader = async ({ context }: Route.LoaderArgs) => {
@@ -14,12 +14,10 @@ export const loader = async ({ context }: Route.LoaderArgs) => {
   }
 }
 
-export default function Page() {
-  const data = useLoaderData<typeof loader>()
-
+export default function Page({ loaderData }: Route.ComponentProps) {
   return (
     <div>
-      <Header user={data.user} />
+      <Header user={loaderData.user} />
       <Container>
         <Outlet />
       </Container>

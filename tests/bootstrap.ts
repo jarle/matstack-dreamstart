@@ -1,9 +1,13 @@
+import ace from '@adonisjs/core/services/ace'
 import app from '@adonisjs/core/services/app'
 import server from '@adonisjs/core/services/server'
 import testUtils from '@adonisjs/core/services/test_utils'
+import mail from '@adonisjs/mail/services/main'
 import { assert } from '@japa/assert'
 import { pluginAdonisJS } from '@japa/plugin-adonisjs'
 import type { Config } from '@japa/runner/types'
+
+export let sentMails: ReturnType<typeof mail.fake>
 
 /**
  * This file is imported by the "bin/test.ts" entrypoint file
@@ -23,8 +27,19 @@ export const plugins: Config['plugins'] = [assert(), pluginAdonisJS(app)]
  * The teardown functions are executer after all the tests
  */
 export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
-  setup: [],
-  teardown: [],
+  setup: [
+    async () => {
+      sentMails = mail.fake()
+    },
+    async () => {
+      ace.exec('migration:run', [])
+    }
+  ],
+  teardown: [
+    async () => {
+      mail.restore()
+    }
+  ],
 }
 
 /**
