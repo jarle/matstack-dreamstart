@@ -27,6 +27,7 @@ jobs:
           node-version: 22
 
       - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
       - name: Install Playwright dependencies
         run: pnpm exec playwright install --with-deps chromium
       - run: pnpm run typecheck

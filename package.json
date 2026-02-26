@@ -9,7 +9,7 @@
     "build": "node ace build",
     "dev": "node ace serve --hmr",
     "test": "node ace test",
-    "lint": "eslint .",
+    "lint": "eslint . --ignore-pattern .react-router --ignore-pattern react-router.config.ts",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "typegen": "react-router typegen"
