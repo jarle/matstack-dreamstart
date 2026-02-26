@@ -9,6 +9,8 @@ description: Writing documentation. Use when key functionality is added or chang
 - The main purpose of the documentation is to guide and inform future development and troubleshooting
   - Only document the system as-is and assume this is the state that it will stay in - do not mention non-goals or future plans.
 - It is imperative that the documentation reflects the real system
+- Avoid referring to low-value information that quickly becomes outdated
+  - Example: specific versions etc
 - Update the documentation when necessary to keep it relevant and correct
 - Use the 80/20 principle when updating documentation
 - Sacrifice grammar for the sake of concision

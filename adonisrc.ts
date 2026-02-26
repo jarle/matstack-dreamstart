@@ -85,6 +85,11 @@ export default defineConfig({
         name: 'functional',
         timeout: 30000,
       },
+      {
+        files: ['tests/browser/**/*.spec(.ts|.js)'],
+        name: 'browser',
+        timeout: Number(process.env.BROWSER_TIMEOUT ?? 40000),
+      },
     ],
     forceExit: false,
   },
