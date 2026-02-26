@@ -2,7 +2,7 @@ import { ServiceProviders } from '#services/_index'
 import type { ApplicationService } from '@adonisjs/core/types'
 
 export default class ServiceProvider {
-  constructor(protected app: ApplicationService) { }
+  constructor(protected app: ApplicationService) {}
 
   register() {
     Object.entries(ServiceProviders).forEach(([key, provider]) => {
@@ -43,10 +43,10 @@ type ProvidedServices = {
   [K in keyof typeof ServiceProviders]: UnwrapProvider<
     Awaited<ReturnType<(typeof ServiceProviders)[K]>>
   > extends new (...args: any[]) => infer R
-  ? R
-  : UnwrapProvider<Awaited<ReturnType<(typeof ServiceProviders)[K]>>>
+    ? R
+    : UnwrapProvider<Awaited<ReturnType<(typeof ServiceProviders)[K]>>>
 }
 
 declare module '@adonisjs/core/types' {
-  export interface ContainerBindings extends ProvidedServices { }
+  export interface ContainerBindings extends ProvidedServices {}
 }

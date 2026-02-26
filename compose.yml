@@ -4,9 +4,9 @@ services:
     image: redis:alpine
     hostname: redis
     ports:
-      - "${REDIS_PORT:-6379}:6379"
+      - '${REDIS_PORT:-6379}:6379'
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ['CMD', 'redis-cli', 'ping']
       retries: 3
       timeout: 5s
     volumes:
@@ -28,7 +28,7 @@ services:
     networks:
       - sail
     healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "${PG_DB_NAME:-default}", "-U", "${PG_USER}"]
+      test: ['CMD', 'pg_isready', '-q', '-d', '${PG_DB_NAME:-default}', '-U', '${PG_USER}']
       retries: 3
       timeout: 5s
 
@@ -46,7 +46,7 @@ services:
       - sail
     command: minio server /data/minio --console-address ":8900"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
       retries: 3
       timeout: 5s
 
@@ -57,7 +57,6 @@ services:
       - '${MAILHOG_DASHBOARD_PORT:-8025}:8025'
     networks:
       - sail
-
 
 networks:
   sail:

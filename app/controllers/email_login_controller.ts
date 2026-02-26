@@ -1,9 +1,9 @@
-import User from '#models/user';
-import UserService from '#services/user_service';
-import UserSignUpService from '#services/user_signup_service';
-import { inject } from '@adonisjs/core';
-import type { HttpContext } from '@adonisjs/core/http';
-import vine from '@vinejs/vine';
+import User from '#models/user'
+import UserService from '#services/user_service'
+import UserSignUpService from '#services/user_signup_service'
+import { inject } from '@adonisjs/core'
+import type { HttpContext } from '@adonisjs/core/http'
+import vine from '@vinejs/vine'
 
 const validator = vine.compile(
   vine.object({
@@ -16,15 +16,10 @@ export default class EmailLoginController {
   constructor(
     private userService: UserService,
     private signUpService: UserSignUpService
-  ) { }
+  ) {}
 
   async index(http: HttpContext) {
-    const {
-      request,
-      logger,
-      response,
-      auth,
-    } = http
+    const { request, logger, response, auth } = http
     if (!request.hasValidSignature()) {
       return response.status(401).send('The URL signature is invalid')
     }

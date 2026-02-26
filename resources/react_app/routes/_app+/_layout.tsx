@@ -1,16 +1,18 @@
-import { Container } from '#web/components/Container';
-import { Header } from '#web/components/Header';
-import { Outlet } from 'react-router';
-import { Route } from './+types/_layout.js';
+import { Container } from '#web/components/Container'
+import { Header } from '#web/components/Header'
+import { Outlet } from 'react-router'
+import { Route } from './+types/_layout.js'
 
 export const loader = async ({ context }: Route.LoaderArgs) => {
   const { http } = context
   const user = http.auth.user
 
   return {
-    user: user ? {
-      email: user.email
-    } : undefined,
+    user: user
+      ? {
+          email: user.email,
+        }
+      : undefined,
   }
 }
 

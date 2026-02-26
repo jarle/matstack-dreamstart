@@ -29,5 +29,5 @@ export default class SendMailJob extends Job {
   /**
    * This is an optional method that gets called when the retries has exceeded and is marked failed.
    */
-  async rescue() { }
+  async rescue() {}
 }

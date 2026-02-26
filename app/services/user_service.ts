@@ -1,8 +1,8 @@
-import User from '#models/user';
-import db from '@adonisjs/lucid/services/db';
+import User from '#models/user'
+import db from '@adonisjs/lucid/services/db'
 
 export default class UserService {
-  async getOrCreateUser(props: { id?: string; email: string; }) {
+  async getOrCreateUser(props: { id?: string; email: string }) {
     const existingUser = await User.findBy('email', props.email)
     if (!existingUser) {
       const trx = await db.transaction()

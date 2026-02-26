@@ -7,14 +7,14 @@ test.group('Intent validation', () => {
     const validation = intentValidation({
       login: {
         email: vine.string().email(),
-        password: vine.string().minLength(6)
-      }
+        password: vine.string().minLength(6),
+      },
     })
 
     const validData = {
       intent: 'login',
       email: 'test@example.com',
-      password: 'password123'
+      password: 'password123',
     }
 
     const result = await validation.validate(validData)
@@ -25,26 +25,26 @@ test.group('Intent validation', () => {
     const validation = intentValidation({
       login: {
         email: vine.string().email(),
-        password: vine.string().minLength(6)
+        password: vine.string().minLength(6),
       },
       register: {
         email: vine.string().email(),
         password: vine.string().minLength(6),
-        confirmPassword: vine.string()
-      }
+        confirmPassword: vine.string(),
+      },
     })
 
     const loginData = {
       intent: 'login',
       email: 'test@example.com',
-      password: 'password123'
+      password: 'password123',
     }
 
     const registerData = {
       intent: 'register',
       email: 'new@example.com',
       password: 'password123',
-      confirmPassword: 'password123'
+      confirmPassword: 'password123',
     }
 
     const loginResult = await validation.validate(loginData)
@@ -59,15 +59,15 @@ test.group('Intent validation', () => {
       updateProfile: {
         name: vine.string().minLength(2),
         age: vine.number().min(18),
-        isActive: vine.boolean()
-      }
+        isActive: vine.boolean(),
+      },
     })
 
     const validData = {
       intent: 'updateProfile',
       name: 'John Doe',
       age: 25,
-      isActive: true
+      isActive: true,
     }
 
     const result = await validation.validate(validData)
@@ -77,13 +77,13 @@ test.group('Intent validation', () => {
   test('throws error for invalid intent', async ({ assert }) => {
     const validation = intentValidation({
       login: {
-        email: vine.string().email()
-      }
+        email: vine.string().email(),
+      },
     })
 
     const invalidData = {
       intent: 'invalid',
-      email: 'test@example.com'
+      email: 'test@example.com',
     }
 
     await assert.rejects(() => validation.validate(invalidData))
@@ -93,13 +93,13 @@ test.group('Intent validation', () => {
     const validation = intentValidation({
       login: {
         email: vine.string().email(),
-        password: vine.string().minLength(6)
-      }
+        password: vine.string().minLength(6),
+      },
     })
 
     const invalidData = {
       intent: 'login',
-      email: 'test@example.com'
+      email: 'test@example.com',
     }
 
     await assert.rejects(() => validation.validate(invalidData))
@@ -109,38 +109,36 @@ test.group('Intent validation', () => {
     const validation = intentValidation({
       login: {
         email: vine.string().email(),
-        password: vine.string().minLength(6)
-      }
+        password: vine.string().minLength(6),
+      },
     })
 
     const invalidData = {
       intent: 'login',
       email: 'invalid-email',
-      password: '123'
+      password: '123',
     }
 
-    await assert.rejects(
-      () => validation.validate(invalidData)
-    )
+    await assert.rejects(() => validation.validate(invalidData))
   })
 
   test('validates intent with optional fields', async ({ assert }) => {
     const validation = intentValidation({
       updateProfile: {
         name: vine.string().minLength(2),
-        bio: vine.string().optional()
-      }
+        bio: vine.string().optional(),
+      },
     })
 
     const dataWithOptional = {
       intent: 'updateProfile',
       name: 'John Doe',
-      bio: 'Software developer'
+      bio: 'Software developer',
     }
 
     const dataWithoutOptional = {
       intent: 'updateProfile',
-      name: 'John Doe'
+      name: 'John Doe',
     }
 
     const result1 = await validation.validate(dataWithOptional)
@@ -152,11 +150,11 @@ test.group('Intent validation', () => {
 
   test('validates intent with empty validation object', async ({ assert }) => {
     const validation = intentValidation({
-      simple: {}
+      simple: {},
     })
 
     const validData = {
-      intent: 'simple'
+      intent: 'simple',
     }
 
     const result = await validation.validate(validData)

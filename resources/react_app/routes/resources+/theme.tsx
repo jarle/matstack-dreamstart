@@ -1,18 +1,18 @@
-import vine from '@vinejs/vine';
-import { useEffect } from 'react';
-import { Form, useFetcher, useLoaderData } from 'react-router';
-import { intentValidation } from '../../utils/intent_validation.js';
-import { Route } from './+types/theme.js';
+import vine from '@vinejs/vine'
+import { useEffect } from 'react'
+import { Form, useFetcher, useLoaderData } from 'react-router'
+import { intentValidation } from '../../utils/intent_validation.js'
+import { Route } from './+types/theme.js'
 
 export const themeCookie = 'app-theme'
 
 const actionValidator = intentValidation({
   'change-theme': {
-    theme: vine.enum(['dark', 'light', 'system'])
+    theme: vine.enum(['dark', 'light', 'system']),
   },
   'set-prefer-dark-mode': {
-    prefersDarkMode: vine.boolean()
-  }
+    prefersDarkMode: vine.boolean(),
+  },
 })
 
 export const action = async ({ context }: Route.ActionArgs) => {
@@ -35,7 +35,7 @@ export const loader = async ({ context }: Route.LoaderArgs) => {
   const { http } = context
 
   return {
-    theme: http.request.cookie(themeCookie, 'system')
+    theme: http.request.cookie(themeCookie, 'system'),
   }
 }
 
@@ -43,18 +43,21 @@ export function useTheme() {
   const fetcher = useFetcher()
 
   useEffect(() => {
-    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDarkMode =
+      window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     if (!document.cookie.includes(themeCookie)) {
-      fetcher.submit({
-        intent: 'set-prefer-dark-mode',
-        prefersDarkMode
-      }, {
-        action: '/resources/theme',
-        method: 'POST',
-      })
+      fetcher.submit(
+        {
+          intent: 'set-prefer-dark-mode',
+          prefersDarkMode,
+        },
+        {
+          action: '/resources/theme',
+          method: 'POST',
+        }
+      )
     }
   }, [])
-
 }
 
 export function ThemeSelector() {
@@ -63,16 +66,16 @@ export function ThemeSelector() {
 
   return (
     <div>
-      <Form method='POST'>
-        <input type='hidden' name='intent' value='change-theme' />
+      <Form method="POST">
+        <input type="hidden" name="intent" value="change-theme" />
 
         <select
-          name='theme'
+          name="theme"
           defaultValue={theme}
           className="w-full max-w-xs"
           onChange={(e) => {
             fetcher.submit(e.target.form, {
-              action: '/resources/theme'
+              action: '/resources/theme',
             })
           }}
         >
@@ -83,5 +86,4 @@ export function ThemeSelector() {
       </Form>
     </div>
   )
-
 }

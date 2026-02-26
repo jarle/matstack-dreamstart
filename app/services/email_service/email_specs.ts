@@ -1,4 +1,4 @@
-import env from '#start/env';
+import env from '#start/env'
 
 export const emailSpecs = {
   email_login: {

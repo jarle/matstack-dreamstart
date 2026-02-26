@@ -1,6 +1,3 @@
 {
-  "recommendations": [
-    "esbenp.prettier-vscode",
-    "redis.redis-for-vscode"
-  ]
+  "recommendations": ["esbenp.prettier-vscode", "redis.redis-for-vscode"]
 }

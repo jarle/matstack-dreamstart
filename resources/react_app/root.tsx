@@ -1,8 +1,8 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from 'react-router';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from 'react-router'
 
-import { Route } from './+types/root.js';
-import { themeCookie } from './routes/resources+/theme.js';
-import './tailwind.css';
+import { Route } from './+types/root.js'
+import { themeCookie } from './routes/resources+/theme.js'
+import './tailwind.css'
 
 export const loader = async ({ context }: Route.LoaderArgs) => {
   const { http } = context
@@ -17,7 +17,7 @@ export const loader = async ({ context }: Route.LoaderArgs) => {
   }
 
   return {
-    theme
+    theme,
   }
 }
 

@@ -1,7 +1,7 @@
-import { NormalizeConstructor } from "@adonisjs/core/types/helpers";
-import { BaseModel, beforeCreate, column } from "@adonisjs/lucid/orm";
-import { nanoid } from "nanoid";
-import { randomUUID } from 'node:crypto';
+import { NormalizeConstructor } from '@adonisjs/core/types/helpers'
+import { BaseModel, beforeCreate, column } from '@adonisjs/lucid/orm'
+import { nanoid } from 'nanoid'
+import { randomUUID } from 'node:crypto'
 
 export function withUuid() {
   return <Model extends NormalizeConstructor<typeof BaseModel>>(source: Model) => {
@@ -12,10 +12,7 @@ export function withUuid() {
       declare id: string
 
       @beforeCreate()
-      static async generateId<T extends typeof UuidModel>(
-        this: T,
-        modelInstance: InstanceType<T>
-      ) {
+      static async generateId<T extends typeof UuidModel>(this: T, modelInstance: InstanceType<T>) {
         if (!modelInstance.id) {
           modelInstance.id = randomUUID()
         }

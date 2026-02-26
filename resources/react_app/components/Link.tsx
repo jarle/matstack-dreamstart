@@ -1,4 +1,4 @@
-import { LinkProps, Link as RLink } from 'react-router';
+import { LinkProps, Link as RLink } from 'react-router'
 import { twMerge } from 'tailwind-merge'
 
 export function Link(props: LinkProps) {

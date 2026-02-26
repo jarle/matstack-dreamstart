@@ -1,11 +1,11 @@
-import UserProfile from "#models/user";
-import { inject } from "@adonisjs/core";
-import { HttpContext } from "@adonisjs/core/http";
-import EmailService from "./email_service/email_service.js";
+import UserProfile from '#models/user'
+import { inject } from '@adonisjs/core'
+import { HttpContext } from '@adonisjs/core/http'
+import EmailService from './email_service/email_service.js'
 
 @inject()
 export default class UserSignUpService {
-  constructor(private emailService: EmailService) { }
+  constructor(private emailService: EmailService) {}
 
   async postSignUp(user: UserProfile, http: HttpContext) {
     http.logger.info(`Created new user ${user.id}`)

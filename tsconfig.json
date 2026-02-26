@@ -1,18 +1,12 @@
 {
   "extends": "@adonisjs/tsconfig/tsconfig.app.json",
-  "include": [
-    "**/*"
-  ],
-  "exclude": [
-    "resources/react_app/**"
-  ],
+  "include": ["**/*"],
+  "exclude": ["resources/react_app/**"],
   "compilerOptions": {
     "rootDir": "./",
     "outDir": "./build",
     "paths": {
-      "#web/*": [
-        "./resources/react_app/*"
-      ]
+      "#web/*": ["./resources/react_app/*"]
     }
   }
 }

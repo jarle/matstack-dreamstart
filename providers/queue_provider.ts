@@ -2,18 +2,17 @@ import type { ApplicationService } from '@adonisjs/core/types'
 import queue from '@rlanz/bull-queue/services/main'
 
 export default class QueueProvider {
-  constructor(protected app: ApplicationService) {
-  }
+  constructor(protected app: ApplicationService) {}
 
   /**
    * Register bindings to the container
    */
-  register() { }
+  register() {}
 
   /**
    * The container bindings have booted
    */
-  async boot() { }
+  async boot() {}
 
   /**
    * The application has been booted
@@ -29,11 +28,10 @@ export default class QueueProvider {
   /**
    * The process has been started
    */
-  async ready() { }
+  async ready() {}
 
   /**
    * Preparing to shutdown the app
    */
-  async shutdown() {
-  }
+  async shutdown() {}
 }

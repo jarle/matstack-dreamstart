@@ -1,15 +1,14 @@
 # Browser client (Plugins) | Japa Documentation
 
-
 # [Browser client](#browser-client)
 
 The browser client of Japa is built on top of [Playwright library](https://playwright.dev/docs/library) and integrates seamlessly with the Japa test runner. Following are some reasons to use this plugin over manually interacting with the Playwright API.
 
--   Automatic management of browsers and browser contexts.
--   Built-in assertions.
--   Ability to extend the `browser`, `context`, and `page` objects using [decorators](#decorators).
--   Class-based pages and interactions to de-compose the page under test into smaller and reusable components.
--   Toggle headless mode, tracing, and browsers using CLI flags.
+- Automatic management of browsers and browser contexts.
+- Built-in assertions.
+- Ability to extend the `browser`, `context`, and `page` objects using [decorators](#decorators).
+- Class-based pages and interactions to de-compose the page under test into smaller and reusable components.
+- Toggle headless mode, tracing, and browsers using CLI flags.
 
 ## [](#installation)Installation
 
@@ -82,7 +81,7 @@ configure({
 
 Once the setup is completed, you can write tests inside the `tests/browser` directory.
 
-tests/browser/visit\_japa.spec.js
+tests/browser/visit_japa.spec.js
 
 Copy code to clipboard
 
@@ -462,8 +461,8 @@ Playwright supports generating traces for actions performed using the Playwright
 
 Using the `@japa/browser-client` plugin, you can automatically generate traces using the `--trace` CLI flag. The `--trace` flag accepts the event at which to create the trace file.
 
--   The `onError` event will generate trace files for failing tests.
--   The `onTest` event will generate trace files for all the tests.
+- The `onError` event will generate trace files for failing tests.
+- The `onTest` event will generate trace files for all the tests.
 
 Copy code to clipboard
 
@@ -490,9 +489,9 @@ browserClient({
 
 You can run your tests against different browsers using the `--browser` flag. Following is the list of valid browser options.
 
--   chromium
--   firefox
--   webkit
+- chromium
+- firefox
+- webkit
 
 Copy code to clipboard
 
@@ -542,7 +541,7 @@ decoratorsCollection.register({
       })
     }
   },
-  
+
   /**
    * Extend response
    */

@@ -10,10 +10,10 @@ Dreamstart is an **opinionated starter kit** for building web apps with [react-a
 Dreamstart was created for quickly developing and launching great products.
 The goal is not simply to glue together different technologies and call it a day, but rather to create a blueprint for building robust products.
 
-
 ## Quickstart
 
 Create a new Dreamstart project using this command:
+
 ```
 npm init adonisjs@latest -- -K="github:jarle/matstack-dreamstart"
 ```

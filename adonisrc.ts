@@ -17,7 +17,7 @@ export default defineConfig({
     () => import('@adonisjs/mail/commands'),
     () => import('@adonisjs/cache/commands'),
     () => import('adonis-sail/commands'),
-    () => import('@rlanz/bull-queue/commands')
+    () => import('@rlanz/bull-queue/commands'),
   ],
 
   /*
@@ -51,7 +51,7 @@ export default defineConfig({
     () => import('@adonisjs/cache/cache_provider'),
     () => import('@rlanz/bull-queue/queue_provider'),
     () => import('@adonisjs/limiter/limiter_provider'),
-    () => import('#providers/queue_provider')
+    () => import('#providers/queue_provider'),
   ],
 
   /*

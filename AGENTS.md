@@ -21,3 +21,9 @@
 - Redis is used for cache and queue-backed runtime behavior.
 - MinIO is used for object storage.
 - MailHog is used for local email capture.
+
+## Formatting Workflow
+
+- After making code changes, run formatting before finishing.
+- Prefer formatting only changed files, then run project-wide formatting only when needed.
+- Use `pnpm lint --fix` for lint auto-fixes and `pnpm format` for prettier formatting.
