@@ -13,3 +13,11 @@
 - Tailwind
 - Shadcn
 - Lucid icons
+
+## App Infrastructure
+
+- App infrastructure is defined in `compose.yml`.
+- PostgreSQL is used as the primary database.
+- Redis is used for cache and queue-backed runtime behavior.
+- MinIO is used for object storage.
+- MailHog is used for local email capture.
