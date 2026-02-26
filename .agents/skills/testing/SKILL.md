@@ -1,8 +1,10 @@
 ---
-description: Creating tests
-globs: 
-alwaysApply: false
+name: testing
+description: Testing guidelines. Use when writing or updating tests.
 ---
+
+## Testing
+
 # Creating tests
 
 Docs: https://docs.adonisjs.com/guides/testing/introduction
@@ -11,17 +13,20 @@ Docs: https://docs.adonisjs.com/guides/testing/introduction
 - New tests are created with the command `node ace make:test --suite=<functional|browser|unit>`
 - Tests are run with `LOG_LEVEL=info node ace test functional|browser|unit`
   - Run a specific group of test with `node ace test --groups=""`
-- A `testUser` is instantiated and exported from the [bootstrap.ts](mdc:tests/bootstrap.ts) file
+- Create a new test user (and organization when needed) per test group via test helpers like `createTestActors` from `tests/utils/test_actors.ts`; do not reuse shared actors
 - Tests should have descriptive snake_case names that make it obvious what they test when looking at the test runner
 - Do not add console logs or any other explicit reporting when output is missing
 - If your service is dependent on other services, those can be instantiated for testing with `await app.container.make(ClassName)`
 - Tests that mutate db data should be wrapped in a global db transaction that is rolled back after running:
+
 ```ts
 test.group('User', (group) => {
   group.each.setup(() => testUtils.db().withGlobalTransaction())
 })
 ```
+
 - The global transaction will not work if you are using transactions in your tested code. In this case, you can use the testUtils.db().truncate() hook. This hook will truncate all your tables after each test.
+
 ```ts
 import { test } from '@japa/runner'
 
@@ -30,27 +35,27 @@ test.group('User', (group) => {
 })
 ```
 
-
 # AdonisJS Testing Guidelines
 
 ## Philosophy: Fakes for Internal, Mocks for External
 
-**Core Principle:** Use Fakes via Dependency Injection (`container.swap`) for testing interactions between your *internal* application services.
+**Core Principle:** Use Fakes via Dependency Injection (`container.swap`) for testing interactions between your _internal_ application services.
 
-**Why Fakes?** 
+**Why Fakes?**
+
 - Promotes test isolation, speed, and control
-- Encourages designing services with clear, testable interfaces 
+- Encourages designing services with clear, testable interfaces
 - If mocking an internal service feels complex, consider refactoring the service's interface for simplicity
 
-**When to Mock?** 
-Reserve mocking primarily for truly *external* systems (e.g., third-party HTTP APIs) where a fake implementation isn't practical.
+**When to Mock?**
+Reserve mocking primarily for truly _external_ systems (e.g., third-party HTTP APIs) where a fake implementation isn't practical.
 
 ## Faking Internal Service Dependencies
 
 ### Mechanism
 
 ```typescript
-app.container.swap(ServiceIdentifier, () => new FakeService());
+app.container.swap(ServiceIdentifier, () => new FakeService())
 ```
 
 ### Creating Fakes
@@ -65,7 +70,7 @@ Since you define the `FakeService`, you control its implementation. Add properti
 - Use simple flags (e.g., `this.methodWasCalled = true`)
 - Maintain internal state relevant to the test if needed
 
-**Accessing the Fake:** Keep a reference to the *instance* of the `FakeService` you create *before* passing its factory function to `swap`. Use this reference in your assertions.
+**Accessing the Fake:** Keep a reference to the _instance_ of the `FakeService` you create _before_ passing its factory function to `swap`. Use this reference in your assertions.
 
 ### Test Lifecycle
 
@@ -79,12 +84,12 @@ Since you define the `FakeService`, you control its implementation. Add properti
 
 // Create a fake NotificationService
 class FakeNotificationService extends NotificationService {
-  public sendWelcomeEmailCalled = false;
-  public welcomeEmailUser: User | null = null;
+  public sendWelcomeEmailCalled = false
+  public welcomeEmailUser: User | null = null
 
   async sendWelcomeEmail(user: User) {
-    this.sendWelcomeEmailCalled = true;
-    this.welcomeEmailUser = user;
+    this.sendWelcomeEmailCalled = true
+    this.welcomeEmailUser = user
     // Don't actually send an email
   }
 
@@ -93,18 +98,18 @@ class FakeNotificationService extends NotificationService {
 
 // Test using the fake
 test('registration sends welcome email', async ({ assert }) => {
-  const fakeNotifier = new FakeNotificationService();
-  app.container.swap(NotificationService, () => fakeNotifier);
+  const fakeNotifier = new FakeNotificationService()
+  app.container.swap(NotificationService, () => fakeNotifier)
 
-  const userService = await app.container.make(UserService);
-  const newUser = await userService.register({ email: 'test@example.com', /* ... */ });
+  const userService = await app.container.make(UserService)
+  const newUser = await userService.register({ email: 'test@example.com' /* ... */ })
 
-  assert.isTrue(fakeNotifier.sendWelcomeEmailCalled);
-  assert.equal(fakeNotifier.welcomeEmailUser?.id, newUser.id);
-  assert.equal(fakeNotifier.welcomeEmailUser?.email, 'test@example.com');
+  assert.isTrue(fakeNotifier.sendWelcomeEmailCalled)
+  assert.equal(fakeNotifier.welcomeEmailUser?.id, newUser.id)
+  assert.equal(fakeNotifier.welcomeEmailUser?.email, 'test@example.com')
 
   // Remember to restore
-  app.container.restore(NotificationService);
+  app.container.restore(NotificationService)
 })
 ```
 
@@ -120,66 +125,66 @@ test.group('My service tests', (group) => {
     await db.beginGlobalTransaction()
     return () => db.rollbackGlobalTransaction()
   })
-  
+
   // tests...
 })
 ```
 
 ### SUT Uses DB Directly
 
-If your Service Under Test directly interacts with the database, test the *real* service implementation. Rely on the DB transaction for cleanup and isolation.
+If your Service Under Test directly interacts with the database, test the _real_ service implementation. Rely on the DB transaction for cleanup and isolation.
 
 ```typescript
 test('user service stores user in DB', async ({ assert }) => {
-  const userService = await app.container.make(UserService);
-  const newUser = await userService.register({ username: 'testuser' });
-  
+  const userService = await app.container.make(UserService)
+  const newUser = await userService.register({ username: 'testuser' })
+
   // Assert user was properly stored
-  assert.isNotNull(newUser.id);
-  
+  assert.isNotNull(newUser.id)
+
   // Verify with a direct DB query
-  const storedUser = await User.findOrFail(newUser.id);
-  assert.equal(storedUser.username, 'testuser');
+  const storedUser = await User.findOrFail(newUser.id)
+  assert.equal(storedUser.username, 'testuser')
 })
 ```
 
 ### SUT Depends on a DB-Interacting Service
 
-Fake the *dependency* service using `container.swap`. The fake should return predefined data to simulate the dependency's database operation. This isolates the SUT from any DB interactions of its dependencies.
+Fake the _dependency_ service using `container.swap`. The fake should return predefined data to simulate the dependency's database operation. This isolates the SUT from any DB interactions of its dependencies.
 
 ```typescript
 test('quota service properly updates user credit balance', async ({ assert }) => {
   // Fake the transaction service that normally writes to DB
   class FakeTransactionService {
-    public lastTransaction = null;
-    
+    public lastTransaction = null
+
     async createTransaction(data) {
-      this.lastTransaction = data;
-      return { id: 'fake-tx-123', ...data };
+      this.lastTransaction = data
+      return { id: 'fake-tx-123', ...data }
     }
   }
-  
-  const fakeTransactions = new FakeTransactionService();
-  app.container.swap('transactions', () => fakeTransactions);
-  
+
+  const fakeTransactions = new FakeTransactionService()
+  app.container.swap('transactions', () => fakeTransactions)
+
   // Service under test
-  const quotaService = await app.container.make(MonthlyQuotaService);
-  const user = testUser;
+  const quotaService = await app.container.make(MonthlyQuotaService)
+  const user = testUser
   const quota = await MonthlyCreditQuota.create({
     userId: user.id,
     maxSummaryCredits: 10000,
     spentSummaryCredits: 4000,
     nextUsageReset: DateTime.now().minus({ days: 1 }),
-  });
-  
-  await quotaService.updateQuota({ quota: quota.id });
-  
+  })
+
+  await quotaService.updateQuota({ quota: quota.id })
+
   // Assert transaction was created with correct data
-  assert.equal(fakeTransactions.lastTransaction.userId, user.id);
-  assert.equal(fakeTransactions.lastTransaction.summaryCredits, 4000);
-  
+  assert.equal(fakeTransactions.lastTransaction.userId, user.id)
+  assert.equal(fakeTransactions.lastTransaction.summaryCredits, 4000)
+
   // Restore original service
-  app.container.restore('transactions');
+  app.container.restore('transactions')
 })
 ```
 
@@ -196,36 +201,36 @@ Use `undici`'s `MockAgent`. It's the library powering Node.js's `fetch` and prov
 ### Mechanism
 
 ```typescript
-import { MockAgent, setGlobalDispatcher } from 'undici';
+import { MockAgent, setGlobalDispatcher } from 'undici'
 
 test('weather service fetches and processes data correctly', async ({ assert }) => {
   // Setup mock agent
-  const agent = new MockAgent();
-  setGlobalDispatcher(agent);
-  
+  const agent = new MockAgent()
+  setGlobalDispatcher(agent)
+
   // Setup intercept
   agent
     .get('https://api.weather.com')
-    .intercept({ 
-      path: '/forecast', 
+    .intercept({
+      path: '/forecast',
       method: 'GET',
-      query: { city: 'oslo' }
+      query: { city: 'oslo' },
     })
-    .reply(200, { 
-      temperature: 5, 
-      condition: 'sunny' 
-    });
-  
+    .reply(200, {
+      temperature: 5,
+      condition: 'sunny',
+    })
+
   // Test service
-  const weatherService = await app.container.make(WeatherService);
-  const forecast = await weatherService.getForecast('oslo');
-  
+  const weatherService = await app.container.make(WeatherService)
+  const forecast = await weatherService.getForecast('oslo')
+
   // Assert
-  assert.equal(forecast.temperature, 5);
-  assert.equal(forecast.condition, 'sunny');
-  
+  assert.equal(forecast.temperature, 5)
+  assert.equal(forecast.condition, 'sunny')
+
   // Cleanup
-  agent.close();
+  agent.close()
 })
 ```
 
@@ -234,7 +239,7 @@ test('weather service fetches and processes data correctly', async ({ assert }) 
 AdonisJS provides official fakes for common modules:
 
 - Emitter fake
-- Hash fake 
+- Hash fake
 - Fake mailer
 - Drive fake
 
@@ -249,23 +254,23 @@ Use `timekeeper` for predictable control over `Date`.
 ### Example
 
 ```typescript
-import timekeeper from 'timekeeper';
+import timekeeper from 'timekeeper'
 
 test('expired tokens are rejected', async ({ assert }) => {
   // Create token that expires in 10 minutes
-  const tokenService = await app.container.make(TokenService);
-  const token = await tokenService.create(testUser.id, { expiresInMinutes: 10 });
-  
+  const tokenService = await app.container.make(TokenService)
+  const token = await tokenService.create(testUser.id, { expiresInMinutes: 10 })
+
   // Travel 30 minutes into the future
-  const futureTime = new Date();
-  futureTime.setMinutes(futureTime.getMinutes() + 30);
-  timekeeper.travel(futureTime);
-  
+  const futureTime = new Date()
+  futureTime.setMinutes(futureTime.getMinutes() + 30)
+  timekeeper.travel(futureTime)
+
   // Assert token is now expired
-  assert.isFalse(await tokenService.verify(token));
-  
+  assert.isFalse(await tokenService.verify(token))
+
   // Reset time
-  timekeeper.reset();
+  timekeeper.reset()
 })
 ```
 

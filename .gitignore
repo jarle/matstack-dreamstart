@@ -28,3 +28,5 @@ package-lock.json
 pnpm-lock.yaml
 
 .react-router/
+
+prior-art/

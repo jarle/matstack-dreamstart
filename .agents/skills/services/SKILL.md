@@ -1,19 +1,19 @@
 ---
-description: Adding new services
-globs: 
-alwaysApply: false
+name: services
+description: AdonisJS service patterns (creation, registration, components). Use when adding or modifying services.
 ---
+
 # Services
 
-- The Remix frontend uses services in loaders/actions through the AdonisJS IoC container.
+- The React Router frontend uses services in loaders/actions through the AdonisJS IoC container.
 - Service classes are located under `app/services` (path alias `#services`)
 - Services should be added with the command `node ace make:service ServiceName` which will instantiate a new class in the `#services` folder.
   - Make the service the default export from its own file
-- Simple services can be one file, more intricate services get their own folder when more files are required.
-- The `@inject()` decorator can be used to inject other services when needed. The decorator is placed above the class declaration.
+- Simple services can be one file, more intricate services get their own folder when more files are required (such as components, utils).
+- The `@inject()` class decorator should be used to inject other services when needed.
 - After adding a new service, it should be registered as a singleton in the IoC container at `app/services/_index.ts`
   - Use snake_case for the registration key
-- Service methods should prefer to take the full UserProfile model instead of just userId
+- Service methods should prefer to take the full User model instead of just userId
 
 ## Service design
 
