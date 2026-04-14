@@ -16,7 +16,7 @@ jobs:
       - name: Start dependency stack
         run: docker compose -f compose.yml up -d --wait
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 9
 
